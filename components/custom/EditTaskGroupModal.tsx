@@ -66,7 +66,7 @@ const EditTaskGroupModal: React.FC<EditTaskGroupModalProps> = ({
   const onSubmit = async (data: EditTaskGroupFormValues) => {
     setLoading(true); // Set loading state to true
     try {
-      const response = await fetch(`http://localhost:3000/api/taskgroup/edit?id=${id}&pathname=${encodeURIComponent(pathname)}`, {
+      const response = await fetch(`/api/taskgroup/edit?id=${id}&pathname=${encodeURIComponent(pathname)}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

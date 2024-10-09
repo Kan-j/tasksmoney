@@ -55,7 +55,7 @@ const CreateTask: React.FC = () => {
   // Submit handler
   const onSubmit = async (data: TaskGroupFormValues) => {
     try {
-      const response = await fetch('http://localhost:3000/api/taskgroup', {
+      const response = await fetch('/api/taskgroup', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
