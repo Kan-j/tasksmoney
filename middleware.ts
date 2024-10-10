@@ -45,6 +45,8 @@ import { NextRequest } from 'next/server';
 
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  console.log("NEXTAUTH_SECRET", process.env.NEXTAUTH_SECRET);
+  console.log("Cookies in request:", req.cookies); 
   
   const { pathname } = req.nextUrl;
   console.log("Here is the token in production", token)
