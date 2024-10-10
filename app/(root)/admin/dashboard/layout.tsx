@@ -1,6 +1,7 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+
 import LeftSideBar from '@/components/custom/LeftSideBar'
 import TopBar from '@/components/custom/TopBar'
+import { authOptions } from '@/lib/config/authOptions';
 import { getServerSession } from 'next-auth';
 import { redirect } from 'next/navigation';
 import React from 'react'
