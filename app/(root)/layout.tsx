@@ -17,8 +17,7 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-const data = await getServerSession()
-console.log(data)
+
   return (
     <AuthProvider>
     <html lang="en">
