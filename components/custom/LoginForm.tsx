@@ -50,7 +50,8 @@ export const LoginForm = () => {
       const result = await signIn("credentials", {
         email: values.email,
         password: values.password,
-        callbackUrl: "/investor/dashboard/profile"
+        callbackUrl: "/",
+        
       });
 
     } catch (err) {

@@ -8,11 +8,11 @@ const LoginPage = async () => {
 
   const session = await getServerSession(authOptions);
     
-  if (session && session.user.isAdmin) {
-    return redirect('/admin/dashboard/users'); // Or any other route you want to redirect non-admin users to
-  }else if(session && !session.user.isAdmin){
-    return redirect('/investor/dashboard/profile');
-  }
+  // if (session && session.user.isAdmin) {
+  //   return redirect('/admin/dashboard/users'); // Or any other route you want to redirect non-admin users to
+  // }else if(session && !session.user.isAdmin){
+  //   return redirect('/investor/dashboard/profile');
+  // }
 
   return (
     <section className="flex flex-col w-full h-screen justify-center items-center">
