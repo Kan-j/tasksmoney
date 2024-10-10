@@ -3,7 +3,7 @@ export {default} from "next-auth/middleware"
 import { NextResponse } from 'next/server';
 import { getToken } from 'next-auth/jwt';
 import { NextRequest } from 'next/server';
-
+import jwt from "jsonwebtoken";
 
 // export async function middleware(req: NextRequest) {
 //   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
@@ -91,10 +91,19 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
   console.log("Pathname:", pathname);
 
+  const secret = process.env.NEXTAUTH_SECRET;
+
+  // Check if the secret is available
+  if (!secret) {
+    throw new Error('NEXTAUTH_SECRET is not defined in the environment variables');
+  }
+
   // Handle cases where the user is already logged in (token exists)
   if (token) {
     console.log("User is logged in");
-
+    const payload = jwt.verify(token, secret);
+    // const payload = jwtDe(token, process.env.NEXTAUTH_SECRET);
+    console.log("Payload",payload);
     // Prevent access to the login or register page if already authenticated
     // if (pathname.startsWith('/login') || pathname.startsWith('/register')) {
     //   if (token.isAdmin) {
