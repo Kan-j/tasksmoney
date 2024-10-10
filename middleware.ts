@@ -10,21 +10,6 @@ export async function middleware(req: NextRequest) {
   const { pathname } = req.nextUrl;
 
   // Handle the case where the user is already signed in and trying to access /login or /register
-  if (token) {
-    if (pathname === '/login' || pathname === '/register') {
-      // If the user is an admin, redirect them to the admin dashboard
-      if (token.isAdmin) {
-        return NextResponse.redirect(new URL('/admin/dashboard/users', req.url));
-      }
-      // Otherwise, redirect them to the investor dashboard
-      return NextResponse.redirect(new URL('/investor/dashboard/profile', req.url));
-    }
-  } else {
-    // If the user is not logged in, but trying to access protected routes
-    if (pathname.startsWith('/investor/dashboard') || pathname.startsWith('/admin/dashboard')) {
-      return NextResponse.redirect(new URL('/login', req.url));
-    }
-  }
 
   // Role-based access control for specific areas
   if (token) {
