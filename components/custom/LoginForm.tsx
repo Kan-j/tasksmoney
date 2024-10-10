@@ -17,6 +17,7 @@ import {
 import { Input } from "@/components/ui/input"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
+import { useRouter } from "next/navigation"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -31,7 +32,7 @@ export const LoginForm = () => {
   // State to manage loading and error states
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
-
+  const router = useRouter()
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -50,8 +51,24 @@ export const LoginForm = () => {
         email: values.email,
         password: values.password,
         redirect: false,
-        callbackUrl: "/investor/dashboard/profile"
+        // callbackUrl: "/investor/dashboard/profile"
       });
+
+      if(result){
+        if (result.ok) {
+          // If there's a specific callbackUrl (such as from a query parameter), use it
+          const callbackUrl = result.url || "/investor/dashboard/profile";  // Default URL if no callbackUrl is provided
+      
+          // Check if the user is an admin and then redirect accordingly
+          const session = await fetch("/api/auth/session").then((res) => res.json());
+          if (session?.user?.isAdmin) {
+            router.push("/admin/dashboard/users");
+          } else {
+            router.push(callbackUrl);  // Redirect to the original page (investor dashboard)
+          }
+        }
+      }
+     
 
 
     } catch (err) {
