@@ -20,7 +20,7 @@ const RechargeRequestsPage = ({ searchParams }: { searchParams: any }) => {
       setLoading(true); // Set loading to true when the session fetch starts
       setError(null); // Clear previous errors
       try {
-        const res = await fetch('http://localhost:3000/api/auth/session');
+        const res = await fetch('/api/auth/session');
         const sessionData = await res.json();
         const fetchedUserId = sessionData?.user?.id || null;
         setUserId(fetchedUserId);

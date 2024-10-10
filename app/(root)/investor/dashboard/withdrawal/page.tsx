@@ -70,7 +70,7 @@ const WithdrawalsPage = ({ searchParams }: { searchParams: any }) => {
       setError(null); // Clear previous errors
       try {
         // Fetch the session to get user ID
-        const sessionRes = await fetch("http://localhost:3000/api/auth/session");
+        const sessionRes = await fetch("/api/auth/session");
         const sessionData = await sessionRes.json();
         const fetchedUserId = sessionData?.user?.id || null;
         setUserId(fetchedUserId);
