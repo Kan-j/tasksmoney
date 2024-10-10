@@ -43,6 +43,27 @@ import { NextRequest } from 'next/server';
 //   return NextResponse.next();
 // }
 
+export async function middleware(req: NextRequest) {
+  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  const { pathname } = req.nextUrl;
+
+  if (token) {
+    // Already logged in, prevent access to login or register pages
+    if (pathname.startsWith('/login' ) || pathname.startsWith('/register' )) {
+      if (token.isAdmin) {
+        return NextResponse.redirect(new URL('/admin/dashboard/users', req.url));
+      }
+      return NextResponse.redirect(new URL('/investor/dashboard/profile', req.url));
+    }
+  } else {
+    // Not logged in, trying to access protected routes
+    if (pathname.startsWith('/investor/dashboard') || pathname.startsWith('/admin/dashboard')) {
+      return NextResponse.redirect(new URL('/login', req.url));
+    }
+  }
+
+  return NextResponse.next();
+}
 
 
 export const config = {
