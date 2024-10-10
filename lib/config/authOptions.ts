@@ -1,6 +1,7 @@
 import { ObjectId } from "mongoose";
 import {  NextAuthOptions } from "next-auth";
 import CredentialsProvider from 'next-auth/providers/credentials';
+import { allowUserToProceedFromStop } from '../actions/usertasks.action';
 
 export const authOptions:NextAuthOptions = {
     providers: [
@@ -51,7 +52,7 @@ export const authOptions:NextAuthOptions = {
       strategy: "jwt",
     },
     callbacks: {
-      async jwt({ token, user }:any) {
+      async jwt({ token, user }) {
         if (user) {
           token.id = user._id;
           token.isAdmin = user.isAdmin;
@@ -60,7 +61,7 @@ export const authOptions:NextAuthOptions = {
         }
         return token;
       },
-      async session({ session, token }:any) {
+      async session({ session, token }) {
         session.user.id = token.id as ObjectId;
         session.user.isAdmin = token.isAdmin as boolean;
         session.user.email = token.email as string;
@@ -68,4 +69,8 @@ export const authOptions:NextAuthOptions = {
         return session;
       },
     },
+    jwt:{
+      secret: process.env.NEXTAUTH_SECRET,  // Ensure secret is used for decryption
+      
+    }
   };
