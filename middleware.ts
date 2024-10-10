@@ -21,9 +21,9 @@ export async function middleware(req: NextRequest) {
   //   }
   // } else {
   //   // If the user is not logged in, but trying to access protected routes
-  //   if (pathname.startsWith('/investor/dashboard') || pathname.startsWith('/admin/dashboard')) {
-  //     return NextResponse.redirect(new URL('/login', req.url));
-  //   }
+    // if (pathname.startsWith('/investor/dashboard') || pathname.startsWith('/admin/dashboard')) {
+    //   return NextResponse.redirect(new URL('/login', req.url));
+    // }
   // }
 
   // Role-based access control for specific areas
@@ -36,6 +36,10 @@ export async function middleware(req: NextRequest) {
     // Investor (non-admin) trying to access admin dashboard
     if (!token.isAdmin && pathname.startsWith('/admin/dashboard')) {
       return NextResponse.redirect(new URL('/investor/dashboard/profile', req.url));
+    }
+  }else {
+    if (pathname.startsWith('/investor/dashboard') || pathname.startsWith('/admin/dashboard')) {
+      return NextResponse.redirect(new URL('/login', req.url));
     }
   }
 
