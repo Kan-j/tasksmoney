@@ -44,39 +44,39 @@ import { NextRequest } from 'next/server';
 // }
 
 
-export async function middleware(req: NextRequest) {
-  const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+// export async function middleware(req: NextRequest) {
+//   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
 
-  // If user is authenticated and tries to access '/login' or '/register', redirect them to their dashboard
-  if (token && (req.nextUrl.pathname === '/login' || req.nextUrl.pathname === '/register')) {
-    if (token.isAdmin) {
-      return NextResponse.redirect(new URL('/admin/dashboard/users', req.url));
-    }
-    return NextResponse.redirect(new URL('/investor/dashboard/profile', req.url));
-  }
+//   // If user is authenticated and tries to access '/login' or '/register', redirect them to their dashboard
+//   if (token && (req.nextUrl.pathname === '/login' || req.nextUrl.pathname === '/register')) {
+//     if (token.isAdmin) {
+//       return NextResponse.redirect(new URL('/admin/dashboard/users', req.url));
+//     }
+//     return NextResponse.redirect(new URL('/investor/dashboard/profile', req.url));
+//   }
 
-  // Redirect to login if token is missing (user not logged in) and they try to access a protected route
-  if (!token && req.nextUrl.pathname.startsWith('/')) {
-    return NextResponse.redirect(new URL('/login', req.url));
-  }
+//   // Redirect to login if token is missing (user not logged in) and they try to access a protected route
+//   if (!token && req.nextUrl.pathname.startsWith('/')) {
+//     return NextResponse.redirect(new URL('/login', req.url));
+//   }
 
-  // If the user is an admin, restrict access to '/investor/dashboard' routes
-  if (token?.isAdmin && req.nextUrl.pathname.startsWith('/investor/dashboard')) {
-    return NextResponse.redirect(new URL('/admin/dashboard/users', req.url));
-  }
+//   // If the user is an admin, restrict access to '/investor/dashboard' routes
+//   if (token?.isAdmin && req.nextUrl.pathname.startsWith('/investor/dashboard')) {
+//     return NextResponse.redirect(new URL('/admin/dashboard/users', req.url));
+//   }
 
-  // If the user is not an admin, restrict access to '/admin/dashboard' routes
-  if (!token?.isAdmin && req.nextUrl.pathname.startsWith('/admin/dashboard')) {
-    return NextResponse.redirect(new URL('/investor/dashboard/profile', req.url));
-  }
+//   // If the user is not an admin, restrict access to '/admin/dashboard' routes
+//   if (!token?.isAdmin && req.nextUrl.pathname.startsWith('/admin/dashboard')) {
+//     return NextResponse.redirect(new URL('/investor/dashboard/profile', req.url));
+//   }
 
-  // Allow access to other routes
-  return NextResponse.next();
-}
+//   // Allow access to other routes
+//   return NextResponse.next();
+// }
 
 
 
 export const config = {
-  matcher: ['/investor/dashboard(.*)','/admin/dashboard/:path*'], // Protect all routes under '/admin/dashboard'
+  matcher: ['/investor/dashboard(.*)','/admin/dashboard(.*)'], // Protect all routes under '/admin/dashboard'
 };
 

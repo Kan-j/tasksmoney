@@ -1,72 +1,76 @@
 import { ObjectId } from "mongoose";
+import { AuthOptions } from "next-auth";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials"
-  
-const handler= NextAuth({
-      providers: [
-          CredentialsProvider({
-              // The name to display on the sign in form (e.g. 'Sign in with...')
-              name: 'Credentials',
-              // The credentials is used to generate a suitable form on the sign in page.
-              // You can specify whatever fields you are expecting to be submitted.
-              // e.g. domain, username, password, 2FA token, etc.
-              // You can pass any HTML attribute to the <input> tag through the object.
-              credentials: {
-                email: { label: "Email", type: "text", placeholder: "firstName@lastName.vra.com" },
-                password: { label: "Password", type: "password" }
-              },
-              async authorize(credentials) {
-                // You need to provide your own logic here that takes the credentials
-                // submitted and returns either a object representing a user or value
-                // that is false/null if the credentials are invalid.
-                // e.g. return { id: 1, name: 'J Smith', email: 'jsmith@example.com' }
-                // You can also use the `req` object to obtain additional parameters
-                // (i.e., the request IP address)
-                const res = await fetch(`${process.env.NEXTAUTH_URL}/api/login`, {
-                  method: 'POST',
-                  body: JSON.stringify({
-                      email: credentials?.email,
-                      password: credentials?.password
-                  }),
-                  headers: { "Content-Type": "application/json" }
-                })
-                const user = await res.json()
-          
-                // If no error and we have user data, return it
-                if (res.ok && user) {
-                  return {...user}
-                }
-                // Return null if user data could not be retrieved
-                return null
-              }
-      })
-      ],
-      pages: {
-        signIn: '/login',
-        newUser: '/register'
+
+export const authOptions:AuthOptions = {
+  providers: [
+    CredentialsProvider({
+      name: "Credentials",
+      credentials: {
+        email: { label: "Email", type: "text", placeholder: "firstName@lastName.vra.com" },
+        password: { label: "Password", type: "password" },
       },
-      session:{
-        strategy: 'jwt'
-      },
-      callbacks: {
-        async jwt({ token, user }) {
-            if (user) {
-              token.id = user._id;
-              token.isAdmin = user.isAdmin;
-              token.email = user.email;
-              token.name = user.username;
-            }
-            return token;
-          },
-          
-          async session({ session, token }) {
-            session.user.isAdmin = token.isAdmin as boolean;
-            session.user.id = token.id as ObjectId;
-            session.user.email = token.email as string;
-            session.user.name = token.name as string;
-            return session;
+      async authorize(credentials) {
+        try {
+          if (!credentials?.email || !credentials?.password) {
+            throw new Error("Missing credentials");
           }
+
+          const res = await fetch(`${process.env.NEXTAUTH_URL}/api/login`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              email: credentials.email,
+              password: credentials.password,
+            }),
+          });
+
+          if (!res.ok) {
+            const errorResponse = await res.json();
+            throw new Error(errorResponse.message || "Login failed");
+          }
+
+          const user = await res.json();
+          if (user) {
+            return user;
+          } else {
+            return null;
+          }
+        } catch (error:any) {
+          console.error("Authorize error:", error.message);
+          return null;
+        }
+      },
+    }),
+  ],
+  pages: {
+    signIn: "/login",
+    newUser: "/register",
+  },
+  session: {
+    strategy: "jwt",
+  },
+  callbacks: {
+    async jwt({ token, user }:any) {
+      if (user) {
+        token.id = user._id;
+        token.isAdmin = user.isAdmin;
+        token.email = user.email;
+        token.name = user.username;
       }
-  });
+      return token;
+    },
+    async session({ session, token }:any) {
+      session.user.id = token.id as ObjectId;
+      session.user.isAdmin = token.isAdmin as boolean;
+      session.user.email = token.email as string;
+      session.user.name = token.name as string;
+      return session;
+    },
+  },
+};
+
+const handler= NextAuth(authOptions);
   
-  export {handler as GET, handler as POST};
+export {handler as GET, handler as POST};

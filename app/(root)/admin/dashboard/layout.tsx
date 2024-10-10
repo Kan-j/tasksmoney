@@ -1,12 +1,20 @@
+import { authOptions } from '@/app/api/auth/[...nextauth]/route';
 import LeftSideBar from '@/components/custom/LeftSideBar'
 import TopBar from '@/components/custom/TopBar'
+import { getServerSession } from 'next-auth';
+import { redirect } from 'next/navigation';
 import React from 'react'
 
-const AdminDashboardLayout = ({
+const AdminDashboardLayout = async({
     children,
   }: {
     children: React.ReactNode;
   }) => {
+  const session = await getServerSession(authOptions);
+
+  if (session && !session.user.isAdmin) {
+    redirect('/investor/dashboard/profile'); // Or any other route you want to redirect non-admin users to
+  }
   return (
     <section>
         <TopBar isAdmin={true}/>
