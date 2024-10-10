@@ -7,6 +7,40 @@ import { Types } from "mongoose"; // For ObjectId type validation
 import bcrypt from 'bcrypt';
 
 
+
+interface RequestBody {
+  email: any;
+  password: any;
+}
+
+// This function acts as the server action
+export async function handleLoginAction(body: RequestBody) {
+  // Connect to MongoDB
+  await connectToDatabase();
+
+  try {
+    // Find user by email
+    const user = await User.findOne({ email: body.email });
+    if (!user) {
+      return { error: "Invalid email or password", status: 401 };
+    }
+
+    // Compare the password with the hashed password in the database
+    const isPasswordValid = await bcrypt.compare(body.password, user.password);
+
+    if (!isPasswordValid) {
+      return { error: "Invalid email or password", status: 401 };
+    }
+
+    // Return the user data without the password
+    const { password, ...userWithoutPassword } = user.toObject();
+
+    return { data: userWithoutPassword, status: 200 };
+  } catch (error: any) {
+    return { error: "Internal Server Error: " + error.message, status: 500 };
+  }
+}
+
 export interface PaginatedUsersResponse {
   users: IUser[];
   totalUsers: number;
