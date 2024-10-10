@@ -51,7 +51,7 @@ export const LoginForm = () => {
         email: values.email,
         password: values.password,
         redirect: true,
-        callbackUrl: "/investor/dashboard/profile"
+        callbackUrl: "/"
       });
 
     } catch (err) {
