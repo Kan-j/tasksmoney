@@ -50,26 +50,9 @@ export const LoginForm = () => {
       const result = await signIn("credentials", {
         email: values.email,
         password: values.password,
-        redirect: false,
-        // callbackUrl: "/investor/dashboard/profile"
+        redirect: true,
+        callbackUrl: "/investor/dashboard/profile"
       });
-
-      if(result){
-        if (result.ok) {
-          // If there's a specific callbackUrl (such as from a query parameter), use it
-          const callbackUrl = result.url || "/investor/dashboard/profile";  // Default URL if no callbackUrl is provided
-      
-          // Check if the user is an admin and then redirect accordingly
-          const session = await fetch("/api/auth/session").then((res) => res.json());
-          if (session?.user?.isAdmin) {
-            router.push("/admin/dashboard/users");
-          } else {
-            router.push(callbackUrl);  // Redirect to the original page (investor dashboard)
-          }
-        }
-      }
-     
-
 
     } catch (err) {
       // Catch any unexpected errors and display a generic error message

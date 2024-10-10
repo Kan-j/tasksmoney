@@ -67,9 +67,5 @@ export const authOptions:AuthOptions = {
         session.user.name = token.name as string;
         return session;
       },
-      async redirect({ url, baseUrl }) {
-        // Ensure the callback URL doesn't get appended indefinitely
-        return url.startsWith(baseUrl) ? url : baseUrl;
-      }
     },
   };
