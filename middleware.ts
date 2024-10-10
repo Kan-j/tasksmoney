@@ -43,14 +43,18 @@ import { NextRequest } from 'next/server';
 //   return NextResponse.next();
 // }
 
+
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
   console.log("NEXTAUTH_SECRET", process.env.NEXTAUTH_SECRET);
   console.log("Cookies in request:", req.cookies); 
+  const sessionToken = req.cookies.get("__Secure-next-auth.session-token");
+  console.log("Session Token: ", sessionToken);
+
   
   const { pathname } = req.nextUrl;
   console.log("Here is the token in production", token)
-
+  console.log("Pathname ", pathname)
   if (token) {
     // Already logged in, prevent access to login or register pages
     if (pathname.startsWith('/login' ) || pathname.startsWith('/register' )) {
