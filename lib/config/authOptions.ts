@@ -67,12 +67,5 @@ export const authOptions:AuthOptions = {
         session.user.name = token.name as string;
         return session;
       },
-      async redirect({ url, baseUrl }) {
-        // Only allow redirects to the baseUrl or internal routes
-        if (url.startsWith(baseUrl)) {
-          return url; // Allow redirect to internal routes
-        }
-        return baseUrl; // Fallback to baseUrl
-      }
     },
   };

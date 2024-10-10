@@ -50,8 +50,8 @@ export const LoginForm = () => {
       const result = await signIn("credentials", {
         email: values.email,
         password: values.password,
-        redirect: true,
-        callbackUrl: "/"
+        // redirect: true,
+        // callbackUrl: "/"
       });
 
     } catch (err) {

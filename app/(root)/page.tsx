@@ -13,9 +13,6 @@ const Home = async() => {
     }else{
         return redirect('/login');
     }
-  return (
-    <div>Home</div>
-  )
 }
 
 export default Home
