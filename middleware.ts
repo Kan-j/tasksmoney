@@ -77,6 +77,6 @@ import { NextRequest } from 'next/server';
 
 
 export const config = {
-  matcher: ['/investor/dashboard(.*)','/admin/dashboard(.*)'], // Protect all routes under '/admin/dashboard'
+  matcher: ['/','/investor/dashboard(.*)','/admin/dashboard(.*)'], // Protect all routes under '/admin/dashboard'
 };
 
