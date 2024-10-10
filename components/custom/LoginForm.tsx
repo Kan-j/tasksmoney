@@ -49,9 +49,10 @@ export const LoginForm = () => {
       const result = await signIn("credentials", {
         email: values.email,
         password: values.password,
-        redirect: true,
-        callbackUrl: "/investor/dashboard/profile"
+        // redirect: true,
+        // callbackUrl: "/investor/dashboard/profile"
       });
+      
 
     } catch (err) {
       // Catch any unexpected errors and display a generic error message

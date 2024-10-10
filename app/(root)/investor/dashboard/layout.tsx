@@ -11,11 +11,7 @@ const InvestorDashboardLayout = async({
   }: {
     children: React.ReactNode;
   }) => {
-    const session = await getServerSession(authOptions);
 
-  if (session && session.user.isAdmin) {
-    redirect('/admin/dashboard/users'); // Or any other route you want to redirect non-admin users to
-  }
   return (
     <section>
         <TopBar isAdmin={false}/>
