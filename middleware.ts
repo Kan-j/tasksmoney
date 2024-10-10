@@ -96,14 +96,14 @@ export async function middleware(req: NextRequest) {
     console.log("User is logged in");
 
     // Prevent access to the login or register page if already authenticated
-    if (pathname.startsWith('/login') || pathname.startsWith('/register')) {
-      if (token.isAdmin) {
-        console.log("User is an admin, redirecting to admin dashboard");
-        return NextResponse.redirect(new URL('/admin/dashboard/users', req.url));
-      }
-      console.log("User is not an admin, redirecting to investor dashboard");
-      return NextResponse.redirect(new URL('/investor/dashboard/profile', req.url));
-    }
+    // if (pathname.startsWith('/login') || pathname.startsWith('/register')) {
+    //   if (token.isAdmin) {
+    //     console.log("User is an admin, redirecting to admin dashboard");
+    //     return NextResponse.redirect(new URL('/admin/dashboard/users', req.url));
+    //   }
+    //   console.log("User is not an admin, redirecting to investor dashboard");
+    //   return NextResponse.redirect(new URL('/investor/dashboard/profile', req.url));
+    // }
   } else {
     // Handle cases where the user is not logged in (token is null)
     console.log("User is NOT logged in");
