@@ -45,7 +45,9 @@ import { NextRequest } from 'next/server';
 
 export async function middleware(req: NextRequest) {
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET });
+  
   const { pathname } = req.nextUrl;
+  console.log("Here is the token in production", token)
 
   if (token) {
     // Already logged in, prevent access to login or register pages
