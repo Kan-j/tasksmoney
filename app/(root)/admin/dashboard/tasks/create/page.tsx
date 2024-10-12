@@ -81,7 +81,6 @@ const CreateTask: React.FC = () => {
       }
 
       const result = await response.json();
-      revalidatePath('/admin/dashboard/tasks')
       alert('Task Group created successfully!');
       reset(); // Reset the form
     } catch (error:any) {

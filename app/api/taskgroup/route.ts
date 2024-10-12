@@ -46,7 +46,6 @@ export async function POST(request: Request) {
 
     // Save the task group to the database
     await newTaskGroup.save();
-    revalidatePath('/admin/dashboard/tasks')
     // Return a success response with the created task group
     return Response.json({ taskGroup: newTaskGroup }, { status: 201 });
   } catch (error: any) {
