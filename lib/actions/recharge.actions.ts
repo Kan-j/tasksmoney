@@ -4,6 +4,7 @@ import RechargeRequest from "../models/RechargeRequest.model"; // Adjust the imp
 import mongoose from "mongoose";
 import { connectToDatabase } from "../mongodb";
 import User from "../models/User.model";
+import { revalidatePath } from "next/cache";
 
 
 
@@ -160,7 +161,7 @@ export async function rejectRechargeRequest(rechargeRequestId: string) {
 
     // Commit the transaction
     await session.commitTransaction();
-
+    
     return JSON.parse(JSON.stringify(rechargeRequest));
   } catch (error: any) {
     await session.abortTransaction();
