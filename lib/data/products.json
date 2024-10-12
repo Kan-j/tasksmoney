@@ -25,25 +25,39 @@
     "availabilityStatus": "Low Stock",
     "reviews": [
       {
-        "rating": 2,
-        "comment": "Very unhappy with my purchase!",
-        "date": "2024-05-23T08:56:21.618Z",
-        "reviewerName": "John Doe",
-        "reviewerEmail": "john.doe@x.dummyjson.com"
-      },
-      {
-        "rating": 2,
-        "comment": "Not as described!",
-        "date": "2024-05-23T08:56:21.618Z",
-        "reviewerName": "Nolan Gonzalez",
-        "reviewerEmail": "nolan.gonzalez@x.dummyjson.com"
-      },
-      {
         "rating": 5,
         "comment": "Very satisfied!",
         "date": "2024-05-23T08:56:21.618Z",
         "reviewerName": "Scarlett Wright",
         "reviewerEmail": "scarlett.wright@x.dummyjson.com"
+      },
+      {
+        "rating": 5,
+        "comment": "Best mascara I've ever used! My lashes look so full and long.",
+        "date": "2024-06-01T10:15:42.123Z",
+        "reviewerName": "Emma Johnson",
+        "reviewerEmail": "emma.johnson@x.dummyjson.com"
+      },
+      {
+        "rating": 5,
+        "comment": "Great quality for the price, lasts all day without smudging.",
+        "date": "2024-06-05T12:34:56.987Z",
+        "reviewerName": "Sophia Martinez",
+        "reviewerEmail": "sophia.martinez@x.dummyjson.com"
+      },
+      {
+        "rating": 5,
+        "comment": "I'm amazed by how well this mascara works! Love the volume it gives.",
+        "date": "2024-06-10T14:22:18.456Z",
+        "reviewerName": "Ava Williams",
+        "reviewerEmail": "ava.williams@x.dummyjson.com"
+      },
+      {
+        "rating": 5,
+        "comment": "It makes my lashes look like falsies! Highly recommend.",
+        "date": "2024-06-12T08:44:31.789Z",
+        "reviewerName": "Olivia Brown",
+        "reviewerEmail": "olivia.brown@x.dummyjson.com"
       }
     ],
     "returnPolicy": "30 days return policy",

@@ -78,24 +78,13 @@ export async function middleware(req: NextRequest) {
   // Get the token using next-auth's getToken utility
   const token = await getToken({ req, secret: process.env.NEXTAUTH_SECRET});
 
-  // Log NEXTAUTH_SECRET for debugging
-  console.log("NEXTAUTH_SECRET:", process.env.NEXTAUTH_SECRET);
-
-  // Retrieve the session token from cookies for additional debugging
-  const sessionToken = req.cookies.get("__Secure-next-auth.session-token");
-  console.log("Session Token from cookies:", sessionToken?.value);
-
-  // Log token received from getToken
-  console.log("Token from getToken:", token);
-
   const { pathname } = req.nextUrl;
-  console.log("Pathname:", pathname);
 
 
 
   // Handle cases where the user is already logged in (token exists)
   if (token) {
-    console.log("User is logged in");
+   
     // Prevent access to the login or register page if already authenticated
     if (pathname.startsWith('/login') || pathname.startsWith('/register')) {
       if (token.isAdmin) {

@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { IoRefreshCircle } from 'react-icons/io5';
 import Link from 'next/link';
+import { revalidatePath } from 'next/cache';
+import { usePathname } from 'next/navigation';
 
 
 // Define Zod schema for validation
@@ -30,6 +32,7 @@ type TaskGroupFormValues = z.infer<typeof taskGroupSchema>;
 
 const CreateTask: React.FC = () => {
   // Setup useForm with zodResolver
+  const pathname= usePathname()
   const {
     register,
     control,
@@ -78,6 +81,7 @@ const CreateTask: React.FC = () => {
       }
 
       const result = await response.json();
+      revalidatePath('/admin/dashboard/tasks')
       alert('Task Group created successfully!');
       reset(); // Reset the form
     } catch (error:any) {

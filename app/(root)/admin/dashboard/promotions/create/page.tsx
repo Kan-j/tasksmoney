@@ -7,6 +7,7 @@ import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'; // For navigation
 import { createPromotion } from '@/lib/actions/promotion.actions'; // Adjust import as necessary
+import { revalidatePath } from 'next/cache';
 
 const CreatePromotion = () => {
   const [title, setTitle] = useState('');
@@ -32,6 +33,7 @@ const CreatePromotion = () => {
         setTitle(''); // Reset title field after successful promotion creation
         setDescription(''); // Reset description field
         setIsActive(false); // Reset isActive state
+        revalidatePath('/admin/dashboard/promotions')
         router.push('/admin/dashboard/promotions'); // Redirect to the promotions list
       } else {
         setError('Failed to create the promotion'); // Handle errors here
