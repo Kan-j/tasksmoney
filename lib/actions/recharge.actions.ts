@@ -24,7 +24,7 @@ export async function rechargeUser({ userId, amount }: { userId: string; amount:
       status: 'pending',
     });
 
-    return { message: 'Recharge request created', data: JSON.parse(JSON.stringify(newRechargeRequest)) };
+    return {status: 'success', message: 'Recharge request created', data: JSON.parse(JSON.stringify(newRechargeRequest)) };
   } catch (error) {
     console.error('Error creating recharge request:', error);
     throw new Error('Server error, please try again later');

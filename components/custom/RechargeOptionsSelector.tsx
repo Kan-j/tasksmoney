@@ -34,7 +34,7 @@ export default function RechargeOptionsSelector({ userId }: RechargeOptionsSelec
     try {
       const response = await rechargeUser({ userId, amount: finalAmount });
       alert(`Recharge request submitted for ${finalAmount} USDT.`);
-      router.push("/investor/dashboard/recharge"); // Navigate to the Recharge Requests page
+      router.push("/investor/dashboard/contact-service");
     } catch (error) {
       console.error("Recharge request failed:", error);
       alert("Failed to submit recharge request. Please try again later.");

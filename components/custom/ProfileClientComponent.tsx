@@ -3,14 +3,19 @@ import BalanceCard from '@/components/custom/BalanceCard';
 import DepositHistoryItem from '@/components/custom/DepositHistoryItem';
 import PromotionCarousel from '@/components/custom/PromotionalCarousel';
 import React, { useState, useEffect } from 'react';
-import { getUserFinancialSummary } from '@/lib/actions/user.actions'; // Assuming this is the action we created
+import { getUserFinancialSummary } from '@/lib/actions/user.actions';
+import { fetchCustomerService } from '@/lib/actions/customerService.actions'; // Assuming this is the server action for customer service
 import Link from 'next/link';
+import { FaTelegram, FaWhatsapp } from 'react-icons/fa6';
 
 const Profile = () => {
-  
   const [loading, setLoading] = useState(true); // Loading state
   const [financialSummary, setFinancialSummary] = useState<any>(null); // Holds financial data
+  const [showCustomerService, setShowCustomerService] = useState(false); // For showing the customer service options
+  const [customerServiceData, setCustomerServiceData] = useState<any>(null); // Holds customer service data
+  const [fetchError, setFetchError] = useState(false); // Error state in case fetching fails
 
+  // Fetch customer service data and financial summary
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -23,8 +28,18 @@ const Profile = () => {
           const summary = await getUserFinancialSummary(userId);
           setFinancialSummary(summary); // Set the fetched financial summary data
         }
+
+        // Fetch customer service URLs
+        const customerServiceRes = await fetchCustomerService();
+        if (customerServiceRes.status === 'success') {
+          setCustomerServiceData(customerServiceRes.data);
+        } else {
+          setFetchError(true); // Set error if no data found
+        }
+
       } catch (error) {
-        console.error("Error fetching financial summary:", error);
+        console.error("Error fetching data:", error);
+        setFetchError(true); // Set error if there's an issue with fetching
       } finally {
         setLoading(false); // Data has been fetched, disable loading state
       }
@@ -32,6 +47,20 @@ const Profile = () => {
 
     fetchData();
   }, []);
+
+  // Handle click for showing customer service options
+  const handleCustomerServiceClick = () => {
+    setShowCustomerService(!showCustomerService); // Toggle the dropdown
+  };
+
+  // Redirect to Telegram or WhatsApp DM
+  const handleContactOption = (option: string) => {
+    if (option === 'telegram' && customerServiceData?.telegramUrl) {
+      window.open(customerServiceData.telegramUrl, '_blank');
+    } else if (option === 'whatsapp' && customerServiceData?.whatsappUrl) {
+      window.open(customerServiceData.whatsappUrl, '_blank');
+    }
+  };
 
   if (loading) {
     return <p>Loading...</p>; // Display a loading message or spinner
@@ -45,7 +74,7 @@ const Profile = () => {
   const { totalAssets, totalCommissions, last10ApprovedRecharges, activePromotions } = financialSummary;
 
   return (
-    <section className="flex flex-col md:w-10/12 lg:w-8/12">
+    <section className="relative flex flex-col md:w-10/12 lg:w-8/12">
       <section className="flex flex-col mb-7">
         <section className="flex justify-between">
           <h1 className="text-2xl font-extrabold">Profile</h1>
@@ -87,6 +116,63 @@ const Profile = () => {
             )}
           </article>
         </section>
+      </section>
+      {/* Floating customer service button */}
+      <section className="fixed bottom-6 right-6">
+              <button 
+          className="bg-orange-500 text-white p-4 rounded-full shadow-lg hover:bg-orange-600 transition-all"
+          onClick={handleCustomerServiceClick}
+        >
+          💬
+        </button>
+        
+        {/* Animated Customer service options (WhatsApp, Telegram) */}
+        <div className={`transition-transform duration-300 ease-in-out ${showCustomerService ? 'translate-x-0 opacity-100 block' : 'translate-x-16 opacity-0 hidden'} fixed bottom-20 right-6 bg-white border border-gray-200 rounded-lg shadow-lg p-4 z-10`}>
+          {/* Telegram button */}
+          {customerServiceData?.telegramUrl ? (
+            <button
+              className="flex items-center gap-3 text-left w-full py-2 px-4 hover:bg-gray-100 rounded-md transition-all"
+              onClick={() => handleContactOption('telegram')}
+            >
+              <FaTelegram size={24} className="text-blue-500" />
+              Telegram
+            </button>
+          ) : (
+            <button
+              className="flex items-center gap-3 text-left w-full py-2 px-4 text-gray-400 cursor-not-allowed rounded-md"
+              disabled
+            >
+              <FaTelegram size={24} className="text-gray-400" />
+              Telegram (Not Available)
+            </button>
+          )}
+
+          {/* WhatsApp button */}
+          {customerServiceData?.whatsappUrl ? (
+            <button
+              className="flex items-center gap-3 text-left w-full py-2 px-4 hover:bg-gray-100 rounded-md transition-all"
+              onClick={() => handleContactOption('whatsapp')}
+            >
+              <FaWhatsapp size={24} className="text-green-500" />
+              WhatsApp
+            </button>
+          ) : (
+            <button
+              className="flex items-center gap-3 text-left w-full py-2 px-4 text-gray-400 cursor-not-allowed rounded-md"
+              disabled
+            >
+              <FaWhatsapp size={24} className="text-gray-400" />
+              WhatsApp (Not Available)
+            </button>
+          )}
+        </div>
+
+        {/* Error message if fetching customer service data fails */}
+        {fetchError && (
+          <p className="text-red-500 text-sm mt-2">
+            Failed to fetch customer service details. Please try again later.
+          </p>
+        )}
       </section>
     </section>
   );

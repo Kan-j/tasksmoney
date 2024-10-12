@@ -90,7 +90,7 @@ const WithdrawalBinding = () => {
           <div className="">
             <h1 className="mb-2 text-sm font-bold">Exchange Name</h1>
             <Input
-              placeholder="Eg. Binance"
+              placeholder="USDT"
               value={exchangeName}
               onChange={(e) => setExchangeName(e.target.value)}
               required

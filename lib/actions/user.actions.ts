@@ -5,6 +5,7 @@ import User, { IUser } from "../models/User.model";// Adjust the import path as 
 import { connectToDatabase } from "../mongodb";
 import { Types } from "mongoose"; // For ObjectId type validation
 import bcrypt from 'bcrypt';
+import { revalidatePath } from "next/cache";
 
 
 
@@ -211,3 +212,52 @@ export const changePassword = async (userId: string, newPassword: string) => {
     return { success: false, message: 'Error resetting password' };
   }
 };
+
+
+
+// Fetch the referral code of the current user
+export async function getReferralCode(userId: string) {
+  try {
+    await connectToDatabase();
+
+    const user = await User.findById(userId);
+
+    if (!user) {
+      throw new Error('User not found');
+    }
+
+    return user.referralCode;
+  } catch (error: any) {
+    throw new Error(`Failed to fetch referral code: ${error.message}`);
+  }
+}
+
+// Fetch referred users by the current user
+export async function getReferredUsers(userId: string) {
+  try {
+    await connectToDatabase();
+
+     // Query to find users referred by the current user
+     const referredUsers = await User.find({ referredBy: userId })
+     .select('username email') // Only return name and email fields, exclude others like password
+     .exec();
+
+    return JSON.parse(JSON.stringify(referredUsers));
+  } catch (error: any) {
+    throw new Error(`Failed to fetch referred users: ${error.message}`);
+  }
+}
+
+
+export async function deleteUserAction(userId: string): Promise<void> {
+  try {
+    await connectToDatabase();
+    const deletedUser = await User.findByIdAndDelete(userId);
+    revalidatePath('/admin/dashboard/users')
+    if (!deletedUser) {
+      throw new Error("User not found or already deleted.");
+    }
+  } catch (error:any) {
+    throw new Error(`Failed to delete user: ${error.message}`);
+  }
+}

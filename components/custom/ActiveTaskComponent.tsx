@@ -49,7 +49,7 @@ const ActiveTaskComponent = ({ userId }: any) => {
   }
 
   if (!activeTask) {
-    return <p>No active task found for this user.</p>;
+    return <section className="my-8 px-7 py-6 rounded-lg bg-white"><p>No active task found for this user.</p></section>;
   }
 
   return (

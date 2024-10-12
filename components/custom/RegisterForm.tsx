@@ -19,17 +19,17 @@ import Link from "next/link";
 
 // Define the schema using Zod
 const formSchema = z.object({
-  username: z.string(),
+  username: z.string().min(3),
   email: z.string().email({
     message: "Invalid email address.",
   }),
   password: z.string().min(6, {
     message: "Password must be at least 6 characters.",
   }),
-  referralCode: z.string().optional(), // Referral code is optional
+  referralCode: z.string().min(3), // Referral code is optional
 });
 
-export const RegisterForm = () => {
+export const RegisterForm = ({referralCode}:{referralCode: string}) => {
   const router = useRouter(); // For programmatic navigation after success
   const [error, setError] = useState<string | null>(null); // To handle error messages
   const [loading, setLoading] = useState<boolean>(false); // To handle the loading state
@@ -40,7 +40,7 @@ export const RegisterForm = () => {
       username: "",
       email: "",
       password: "",
-      referralCode: "", // Default empty value for referral code
+      referralCode: referralCode || 'BFiLkZ4O', // Default empty value for referral code
     },
   });
 
@@ -78,7 +78,7 @@ export const RegisterForm = () => {
   };
 
   return (
-    <section className="w-72 sm:w-80 md:w-96">
+    <section className="w-72 sm:w-80 md:w-96 my-6">
       <section className="flex flex-col items-start gap-4 mb-5">
         <h3 className="font-bold text-4xl">Hello there 👋</h3>
       </section>
@@ -137,7 +137,7 @@ export const RegisterForm = () => {
             name="referralCode"
             render={({ field }) => (
               <FormItem>
-                <FormLabel className="text-gray-700">Referral Code (Optional)</FormLabel>
+                <FormLabel className="text-gray-700">Referral Code </FormLabel>
                 <FormControl>
                   <Input placeholder="Enter referral code" {...field} />
                 </FormControl>

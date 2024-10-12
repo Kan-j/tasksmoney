@@ -4,6 +4,8 @@ import { Button } from "@/components/ui/button";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { AiOutlineArrowRight } from "react-icons/ai";
 import { useRouter } from "next/navigation";
+import { deleteUserAction } from "@/lib/actions/user.actions";
+import { useState, useTransition } from "react";
 
 // Define the User interface
 interface User {
@@ -21,6 +23,24 @@ interface UserManagementTableProps {
 
 const UserManagementTable: React.FC<UserManagementTableProps> = ({ users, totalPages, currentPage }) => {
   const router = useRouter();
+  const [loading, setLoading] = useState<string | null>(null);
+  const [isPending, startTransition] = useTransition();
+  const handleDeleteClick = (id: string) => {
+    if (!confirm("Are you sure you want to delete this user?")) return; // Confirm the delete action
+    
+    setLoading(id); // Set loading state for this specific user
+    
+    startTransition(async () => {
+      try {
+        await deleteUserAction(id); // Call server action to delete the user
+      } catch (error) {
+        console.error("Error deleting user:", error);
+        alert("Failed to delete user. Please try again.");
+      } finally {
+        setLoading(null); // Reset the loading state
+      }
+    });
+  };
 
   const handleViewClick = (id: string) => {
     router.push(`/admin/dashboard/users/${id}`)
@@ -33,7 +53,7 @@ const UserManagementTable: React.FC<UserManagementTableProps> = ({ users, totalP
             <TableRow className="bg-gray-100">
               <TableHead className="px-6 py-4 text-left text-gray-600">Name</TableHead>
               <TableHead className="px-6 py-4 text-left text-gray-600">Email</TableHead>
-              <TableHead className="px-6 py-4 text-center text-gray-600">Actions</TableHead>
+              <TableHead className="px-6 py-4 text-center text-gray-600">Action</TableHead>
               <TableHead className="px-6 py-4 text-center text-gray-600">View</TableHead>
             </TableRow>
           </TableHeader>
@@ -47,11 +67,14 @@ const UserManagementTable: React.FC<UserManagementTableProps> = ({ users, totalP
                 <TableCell className="px-6 py-4 font-medium text-gray-900">{user.email}</TableCell>
                 <TableCell className="px-6 py-4 text-center">
                   <div className="flex justify-center space-x-2">
-                    <Button variant="ghost" size="sm">
-                      <MdEdit className="text-gray-500" size={20} />
-                    </Button>
-                    <Button variant="ghost" size="sm">
-                      <MdDelete className="text-gray-500" size={20} />
+                    
+                  <Button
+                      variant="ghost"
+                      size="sm"
+                      onClick={() => handleDeleteClick(user._id)}
+                      disabled={loading === user._id || isPending} // Disable if loading or pending
+                    >
+                      {loading === user._id ? "Deleting..." : <MdDelete className="text-gray-500" size={20} />}
                     </Button>
                   </div>
                 </TableCell>

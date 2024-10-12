@@ -3,6 +3,7 @@
 import { revalidatePath } from "next/cache";
 import TaskGroup, { ITaskGroup } from "../models/TaskGroup.model";  // Adjust the import path as necessary
 import { connectToDatabase } from "../mongodb";
+import UserTaskProgress from "../models/UserTasksProgress.model";
 
 
 
@@ -62,6 +63,10 @@ export async function deleteTaskGroupAction({taskGroupId}:{taskGroupId:string}) 
     if (!taskGroup) {
       throw new Error("Task group not found or already deleted");
     }
+
+     // Find and delete all UserProgress documents related to the deleted task group
+     const deletedUserProgress = await UserTaskProgress.deleteMany({ taskGroupId: taskGroupId });
+
     revalidatePath('/admin/dashboard/tasks')
     return taskGroup;
   } catch (error: any) {

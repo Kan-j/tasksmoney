@@ -1,5 +1,7 @@
 "use client"
 import ActiveTaskComponent from '@/components/custom/ActiveTaskComponent'
+import ReferralCodeAndLink from '@/components/custom/ReferralCodeAndLink'
+import ReferredUsers from '@/components/custom/ReferredUsers'
 import UserProfile from '@/components/custom/UserProfile'
 import UserTaskAssignment from '@/components/custom/UserTaskAssignment'
 import { Button } from '@/components/ui/button'
@@ -45,6 +47,8 @@ const handleResetPassword = async () => {
         <UserProfile userId={userId}/>
         <UserTaskAssignment userId={userId}/>
         <ActiveTaskComponent userId={userId} />
+        <ReferralCodeAndLink userId={userId} />
+        <ReferredUsers userId={userId} />
          
          {/* Reset Password Section */}
             <section className="my-6 ">

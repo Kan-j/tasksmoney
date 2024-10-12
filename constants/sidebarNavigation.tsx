@@ -45,6 +45,12 @@ export const sideBarLinks = [
         label: "Account Settings",
     },
     {
+        icon: <HiOutlineUserCircle fontSize={22}/>,
+        route: "/investor/dashboard/referrals",
+        label: "Referrals",
+    },
+
+    {
         icon: <MdInfoOutline fontSize={22}/>,
         route: "/investor/dashboard/terms",
         label: "Terms & Conditions",
