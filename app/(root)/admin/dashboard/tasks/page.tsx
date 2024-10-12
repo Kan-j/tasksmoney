@@ -1,5 +1,5 @@
 // app/tasks/page.tsx
-
+export const dynamic = 'force-dynamic'
 import TaskGroupItem from '@/components/custom/TaskGroupItem';
 import { Button } from '@/components/ui/button';
 import { getAllTaskGroups } from '@/lib/actions/taskGroup.action';

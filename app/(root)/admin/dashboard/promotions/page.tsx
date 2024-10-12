@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 // app/admin/dashboard/promotions/page.tsx
 import PromotionsCard from '@/components/custom/PromotionsCard';// import to include PromotionsCard
 import { deletePromotion, fetchAllPromotions, togglePromotionActive } from '@/lib/actions/promotion.actions'; // Import the actions

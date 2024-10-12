@@ -86,7 +86,7 @@ const CreateTask: React.FC = () => {
       reset(); // Reset the form
     } catch (error:any) {
       console.error('Error creating task group:', error);
-      alert("You failed")
+      alert(error.message)
     }
   };
 

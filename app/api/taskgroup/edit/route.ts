@@ -10,8 +10,7 @@ export async function PUT(request: NextRequest) {
     // const taskGroupId = searchParams.get('id');
     const searchParams = request.nextUrl.searchParams
     const taskGroupId = searchParams.get('id')
-    const pathname = searchParams.get('pathname')
-   
+
     // Validate taskGroupId
     if (!taskGroupId) {
       return Response.json({ error: 'Task group ID is required' }, { status: 400 });
@@ -63,7 +62,7 @@ export async function PUT(request: NextRequest) {
     if (!updatedTaskGroup) {
       return Response.json({ error: 'Task group not found' }, { status: 404 });
     }
-    revalidatePath(pathname as string)
+    revalidatePath('/admin/dashboard/tasks')
     // Return the updated task group
     return Response.json({ taskGroup: updatedTaskGroup }, { status: 200 });
   } catch (error: any) {

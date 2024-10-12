@@ -3,6 +3,7 @@
 import Promotion from "../models/Promotion.model";
 import { z } from 'zod';
 import { connectToDatabase } from "../mongodb";
+import { revalidatePath } from "next/cache";
 
 
 // Define a schema for validation
@@ -40,7 +41,6 @@ export async function createPromotion(formData: FormData) {
       description,
       isActive: isActive === 'on', // Convert checkbox value to boolean
     });
-
 
 
     // Return success response or redirect

@@ -1,5 +1,6 @@
 "use server";
 
+import { revalidatePath } from "next/cache";
 import TaskGroup, { ITaskGroup } from "../models/TaskGroup.model";  // Adjust the import path as necessary
 import { connectToDatabase } from "../mongodb";
 
@@ -61,7 +62,7 @@ export async function deleteTaskGroupAction({taskGroupId}:{taskGroupId:string}) 
     if (!taskGroup) {
       throw new Error("Task group not found or already deleted");
     }
-
+    revalidatePath('/admin/dashboard/tasks')
     return taskGroup;
   } catch (error: any) {
     throw new Error(`Failed to delete task group: ${error.message}`);

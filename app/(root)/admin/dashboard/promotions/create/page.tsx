@@ -33,13 +33,12 @@ const CreatePromotion = () => {
         setTitle(''); // Reset title field after successful promotion creation
         setDescription(''); // Reset description field
         setIsActive(false); // Reset isActive state
-        revalidatePath('/admin/dashboard/promotions')
         router.push('/admin/dashboard/promotions'); // Redirect to the promotions list
       } else {
         setError('Failed to create the promotion'); // Handle errors here
       }
-    } catch (error) {
-      setError('An error occurred while creating the promotion');
+    } catch (error:any) {
+      setError(error.message);
     } finally {
       setLoading(false); // Reset loading state
     }
