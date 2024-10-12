@@ -77,12 +77,13 @@ const CreateTask: React.FC = () => {
       if (!response.ok) {
         const errorData = await response.json();
         alert(`Error: ${errorData.error || 'Failed to create task group'}`);
-        router.push('/admin/dashboard/tasks')
+       
         return;
       }
 
       const result = await response.json();
       alert('Task Group created successfully!');
+      router.push('/admin/dashboard/tasks')
       reset(); // Reset the form
     } catch (error:any) {
       console.error('Error creating task group:', error);
