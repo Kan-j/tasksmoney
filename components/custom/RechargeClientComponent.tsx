@@ -54,7 +54,7 @@ const RechargeClientComponent = () => {
         </section>
       </section>
 
-      <section className="my-6">
+      <section className="my-6 w-full">
         {/* Render Recharge Request Table */}
         <RechargeRequestTable rechargeRequests={rechargeRequests} />
       </section>

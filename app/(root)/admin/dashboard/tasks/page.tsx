@@ -10,7 +10,7 @@ const TasksPage = async () => {
   const { taskGroups } = await getAllTaskGroups();
 
   return (
-    <section className="flex flex-col md:w-10/12 lg:w-8/12">
+    <section className="flex flex-col w-full md:w-10/12 lg:w-8/12">
       <section className="flex flex-col mb-7">
         <section className="flex justify-between gap-4 ">
           <section className="flex flex-col">
@@ -19,7 +19,7 @@ const TasksPage = async () => {
 
           <Link href="/admin/dashboard/tasks/create"  className="bg-orange-500 flex justify-center items-center h-fit text-white hover:bg-orange-600 px-4 py-2 rounded-md">Create Task</Link>
         </section>
-        <h3 className="text-gray-700 w-3/5">Create tasks and manage task settings</h3>
+        <h3 className="text-gray-700 w-4/5">Create tasks and manage task settings</h3>
       </section>
 
       <section className="my-8 w-full">

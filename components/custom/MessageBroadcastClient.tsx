@@ -1,7 +1,6 @@
 // components/MessageBroadcast.tsx
 'use client';
 
-import { Button } from '@/components/ui/button'; 
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { fetchAllMessageBroadcasts } from '@/lib/actions/messageBroadcast.actions'; // Import the server action
@@ -29,12 +28,12 @@ const MessageBroadcastClient = () => {
     <section className="flex flex-col md:w-10/12 lg:w-8/12">
       <section className="flex flex-col mb-7">
         <section className="flex justify-between">
-          <h1 className="text-2xl font-extrabold">Message Broadcast</h1>
+          <h1 className="text-lg md:text-2xl font-extrabold">Message Broadcast</h1>
           <Link href="/admin/dashboard/message-broadcast/create" className="bg-orange-500 flex justify-center items-center h-fit text-white hover:bg-orange-600 px-4 py-2 rounded-md">
             New Broadcast
           </Link>
         </section>
-        <h3 className="text-gray-700 mt-4">Welcome to the message broadcast page! Here, you can send important updates or announcements to all users quickly and easily</h3>
+        <h3 className="text-gray-700 mt-4 text-sm md:text-base">Welcome to the message broadcast page! Here, you can send important updates or announcements to all users quickly and easily</h3>
       </section>
 
       <section className="my-6 flex flex-col gap-4">

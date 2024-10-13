@@ -40,10 +40,10 @@ const CreateMessageBroadcast = () => {
     <section className="flex flex-col md:w-10/12 lg:w-8/12">
       <section className="flex flex-col mb-7">
         <section className="flex justify-between">
-          <h1 className="text-2xl font-extrabold">New Broadcast</h1>
+          <h1 className="text-lg md:text-2xl font-extrabold">New Broadcast</h1>
           <Link
             href="/admin/dashboard/message-broadcast"
-            className="bg-gray-500 flex justify-center items-center h-fit text-white hover:bg-gray-600 px-4 py-2 rounded-md"
+            className="bg-gray-500 flex justify-center items-center h-fit text-white hover:bg-gray-600 px-4 py-2 rounded-md text-sm md:text-base"
           >
             Back
           </Link>

@@ -39,8 +39,8 @@ const RechargeRequestTable = ({ rechargeRequests }: { rechargeRequests: any[] })
 
   return (
     <div className="w-full mt-8">
-      <div className="overflow-auto rounded-lg shadow-md">
-        <Table className="min-w-full border border-gray-200">
+      <div className="overflow-x-auto sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg xl:max-w-screen-xl rounded-lg shadow-md">
+        <Table className="min-w-full  border border-gray-200">
           {/* Table Head */}
           <TableHeader>
             <TableRow className="bg-gray-100">
