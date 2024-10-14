@@ -109,16 +109,14 @@ const UserTasksWorks = ({ userId }: any) => {
   if (error) return <p>{error}</p>;
 
   return (
-    <section className="flex flex-col md:w-10/12 lg:w-8/12">
+    <section className="flex flex-col w-full md:w-10/12 lg:w-8/12">
       {tasksCompleted ? (
         <section className="flex flex-col items-center justify-center mt-20">
           <Confetti width={window.innerWidth} height={window.innerHeight} /> {/* Confetti Animation */}
           <h1 className="text-4xl font-extrabold text-green-600 mb-4">Congratulations!</h1>
           <p className="text-lg text-gray-700 mb-6">You have completed all your tasks.</p>
           <p className="text-lg text-gray-600 mb-6">No active tasks are available at the moment.</p>
-          <Button className="bg-blue-500 hover:bg-blue-600">
-            Explore More Tasks
-          </Button>
+          
         </section>
       ) : noActiveTasks ? (
         <section className="flex flex-col  mt-20">
@@ -142,10 +140,10 @@ const UserTasksWorks = ({ userId }: any) => {
         </section>
       ) : (
         <section className="flex flex-col mb-7">
-          <section className="flex justify-between gap-4">
+          <section className="flex md:flex-row flex-col justify-between gap-4">
             <section className="flex flex-col">
               <h1 className="text-2xl font-extrabold mb-4">Tasks</h1>
-              <h3 className="text-gray-700 w-4/5">
+              <h3 className="text-gray-700 md:w-4/5 w-full">
                 The system will auto-refresh the commission for each product and add it to your current balance.
               </h3>
             </section>
@@ -159,7 +157,7 @@ const UserTasksWorks = ({ userId }: any) => {
 
           <section className="my-8 w-full">
             <section className="flex flex-col items-center">
-              <section className="w-8/12 flex flex-col justify-center bg-white px-10 py-5 rounded-lg mb-4">
+              <section className="md:w-8/12 w-full flex flex-col justify-center bg-white px-10 py-5 rounded-lg mb-4">
                 <div className="bg-gray-100 relative px-4 py-4 flex justify-center rounded-lg mb-4">
                   <div className="absolute top-2 right-2 text-sm bg-white text-black px-3 py-1 rounded-full border border-gray-300 font-bold">
                     {activeTask.tasksCompleted} / {activeTask.totalTasks}

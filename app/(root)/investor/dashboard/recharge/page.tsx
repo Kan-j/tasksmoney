@@ -46,7 +46,7 @@ const RechargeRequestsPage = ({ searchParams }: { searchParams: any }) => {
   }, [searchParams.page]);
 
   return (
-    <section className="flex flex-col md:w-10/12 lg:w-8/12">
+    <section className="flex flex-col w-full md:w-10/12 lg:w-8/12">
       <section className="flex flex-col mb-7">
         <section className="flex justify-between">
           <h1 className="text-2xl font-extrabold">Recharge Requests</h1>

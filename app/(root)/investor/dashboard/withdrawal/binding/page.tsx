@@ -87,7 +87,7 @@ const WithdrawalBinding = () => {
 
       <form onSubmit={handleSubmit} className="my-8">
         <section className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div className="">
+          <div className="col-span-2 md:col-span-1">
             <h1 className="mb-2 text-sm font-bold">Exchange Name</h1>
             <Input
               placeholder="USDT"
@@ -96,7 +96,7 @@ const WithdrawalBinding = () => {
               required
             />
           </div>
-          <div className="">
+          <div className="col-span-2 md:col-span-1">
             <h1 className="mb-2 text-sm font-bold">Wallet Address</h1>
             <Input
               placeholder="Eg. 123534356765689"

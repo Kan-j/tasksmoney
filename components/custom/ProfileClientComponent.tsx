@@ -74,19 +74,19 @@ const Profile = () => {
   const { totalAssets, totalCommissions, last10ApprovedRecharges, activePromotions } = financialSummary;
 
   return (
-    <section className="relative flex flex-col md:w-10/12 lg:w-8/12">
+    <section className="relative w-full flex flex-col md:w-10/12 lg:w-8/12">
       <section className="flex flex-col mb-7">
         <section className="flex justify-between">
-          <h1 className="text-2xl font-extrabold">Profile</h1>
+          <h1 className="md:text-2xl text-lg font-extrabold">Profile</h1>
           <Link href="/investor/dashboard/withdrawal/create" className="bg-orange-500 flex justify-center items-center h-fit text-white hover:bg-orange-600 px-4 py-2 rounded-md">
             Withdraw
           </Link>
         </section>
-        <h3 className="text-gray-700">Contact customer support to make a deposit</h3>
+        <h3 className="text-gray-700 mt-2">Contact customer support to make a deposit</h3>
       </section>
 
       {/* Display total assets and commissions */}
-      <section className="flex justify-between gap-6">
+      <section className="flex flex-col md:flex-row justify-between gap-6">
         <BalanceCard title='Total Assets' amount={totalAssets} time='2pm 21,09,2024'/>
         <BalanceCard title='Commissions' amount={totalCommissions} time='2pm 21,09,2024' isGreen={true}/>
       </section>
