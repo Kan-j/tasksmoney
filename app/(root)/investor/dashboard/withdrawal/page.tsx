@@ -133,7 +133,7 @@ const WithdrawalsPage = ({ searchParams }: { searchParams: any }) => {
       ) : (
         <>
           {/* Withdrawal Table */}
-          <div className="mt-6 overflow-hidden w-[400px] sm:w-[500px] md:w-[700px] shadow-md rounded-lg">
+          <div className="mt-6 overflow-hidden w-[300px] sm:w-[500px] md:w-[700px] shadow-md rounded-lg">
             <Table className="min-w-full border-collapse bg-white">
               <TableHeader>
                 <TableRow>
