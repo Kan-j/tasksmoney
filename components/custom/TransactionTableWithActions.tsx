@@ -40,7 +40,7 @@ const TransactionTableWithActions = ({ withdrawRequests }: { withdrawRequests: a
   return (
     <div className="w-full">
       {/* Table */}
-      <div className="overflow-auto rounded-lg shadow-md">
+      <div className="overflow-hidden w-[300px] sm:w-[500px] md:w-[700px] shadow-md rounded-lg">
         <Table className="min-w-full border border-gray-200">
           {/* Table Header */}
           <TableHeader>

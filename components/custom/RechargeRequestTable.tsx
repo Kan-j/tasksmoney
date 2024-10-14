@@ -39,7 +39,7 @@ const RechargeRequestTable = ({ rechargeRequests }: { rechargeRequests: any[] })
 
   return (
     <div className="w-full mt-8">
-      <div className="overflow-hidden w-[300px] sm:w-[500px] md:w-[700px] shadow-md">
+      <div className="overflow-hidden w-[300px] sm:w-[500px] md:w-[700px] shadow-md rounded-lg">
         <Table className="min-w-full  border border-gray-200">
           {/* Table Head */}
           <TableHeader>

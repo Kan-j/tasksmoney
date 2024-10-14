@@ -47,7 +47,7 @@ const UserManagementTable: React.FC<UserManagementTableProps> = ({ users, totalP
   };
   return (
     <div className="w-full">
-      <div className="overflow-auto">
+      <div className="overflow-hidden w-[300px] sm:w-[500px] md:w-[700px] shadow-md rounded-lg">
         <Table className="min-w-full border-collapse">
           <TableHeader>
             <TableRow className="bg-gray-100">
