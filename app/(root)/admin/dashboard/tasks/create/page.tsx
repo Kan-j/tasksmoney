@@ -124,7 +124,7 @@ const CreateTask: React.FC = () => {
                   {errors.taskGroupName && <p className="text-red-500">{errors.taskGroupName.message}</p>}
                 </div>
 
-                <div className="">
+                <div className="col-span-2 md:col-span-1">
                   <h1 className="mb-2 text-sm font-bold">Total Tasks</h1>
                   <Input
                     type="number"
@@ -136,7 +136,7 @@ const CreateTask: React.FC = () => {
                   {errors.totalTasks && <p className="text-red-500">{errors.totalTasks.message}</p>}
                 </div>
 
-                <div className="">
+                <div className="col-span-2 md:col-span-1">
                   <h1 className="mb-2 text-sm font-bold">Earning Per Task</h1>
                   <Input
                     type="number"
@@ -149,8 +149,8 @@ const CreateTask: React.FC = () => {
                 </div>
 
                 {fields.map((stop, index) => (
-                  <React.Fragment key={stop.id}>
-                    <div>
+                  <section key={stop.id}  className='grid grid-cols-1 md:grid-cols-2 gap-6 col-span-2 md:flex-row' >
+                    <div className='col-span-2 md:col-span-1'>
                       <h1 className="mb-2 text-sm font-bold">Task Number</h1>
                       <Input
                         type="number"
@@ -164,7 +164,7 @@ const CreateTask: React.FC = () => {
                       )}
                     </div>
 
-                    <div>
+                    <div className='col-span-2 md:col-span-1'>
                       <h1 className="mb-2 text-sm font-bold">Amount</h1>
                       <Input
                         type="number"
@@ -181,7 +181,7 @@ const CreateTask: React.FC = () => {
                     <Button variant="secondary" className='col-span-2' onClick={() => remove(index)}>
                       Remove
                     </Button>
-                  </React.Fragment>
+                  </section>
                 ))}
 
                 <div className="col-span-2 flex justify-center mt-4 gap-6">

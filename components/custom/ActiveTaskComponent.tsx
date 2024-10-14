@@ -58,7 +58,7 @@ const ActiveTaskComponent = ({ userId }: any) => {
         <h1 className="font-extrabold mb-3 text-xl">Active Task</h1>
       </section>
       <section className="border px-6 py-6 rounded-lg w-full">
-        <section className="flex justify-between gap-4 border-b pb-4 w-full">
+        <section className="flex md:flex-row  flex-col justify-between gap-4 border-b pb-4 w-full">
           <section className="flex flex-col w-full">
             <h1 className="text-lg font-medium mb-4">{activeTask.taskGroupName}</h1>
             <h3 className="text-gray-700 w-4/5">${activeTask.earningPerTask} Earnings per task</h3>

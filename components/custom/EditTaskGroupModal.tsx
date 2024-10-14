@@ -131,7 +131,7 @@ const EditTaskGroupModal: React.FC<EditTaskGroupModalProps> = ({
               )}
             </div>
 
-            <div>
+            <div className="col-span-2 md:col-span-1">
               <h1 className="mb-2 text-sm font-bold">Total Tasks</h1>
               <Input
                 placeholder="Total number of tasks"
@@ -143,7 +143,7 @@ const EditTaskGroupModal: React.FC<EditTaskGroupModalProps> = ({
               )}
             </div>
 
-            <div>
+            <div className="col-span-2 md:col-span-1">
               <h1 className="mb-2 text-sm font-bold">Earning Per Task</h1>
               <Input
                 placeholder="Earnings per task"
@@ -156,8 +156,8 @@ const EditTaskGroupModal: React.FC<EditTaskGroupModalProps> = ({
             </div>
 
             {stopPoints.map((stop, index) => (
-              <React.Fragment key={index}>
-                <div>
+                <section key={index} className='grid grid-cols-1 md:grid-cols-2 gap-6 col-span-2 md:flex-row'>
+                  <div className="col-span-2 md:col-span-1">
                   <h1 className="mb-2 text-sm font-bold">Task Number</h1>
                   <Input
                     placeholder="Task number"
@@ -171,7 +171,7 @@ const EditTaskGroupModal: React.FC<EditTaskGroupModalProps> = ({
                     </p>
                   )}
                 </div>
-                <div>
+                <div className="col-span-2 md:col-span-1">
                   <h1 className="mb-2 text-sm font-bold">Payment Amount</h1>
                   <Input
                     placeholder="Payment amount"
@@ -185,7 +185,7 @@ const EditTaskGroupModal: React.FC<EditTaskGroupModalProps> = ({
                     </p>
                   )}
                 </div>
-              </React.Fragment>
+                </section>
             ))}
           </section>
 

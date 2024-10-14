@@ -60,14 +60,14 @@ const UserProfile = ({ userId }: any) => {
   }
 
   return (
-    <section className="flex justify-between gap-6">
+    <section className="flex flex-col md:flex-row justify-between gap-6">
       <section className="">
         <BalanceCard title='Total Assets' amount={balance?.toString() || '0'} time={formattedDate} />
       </section>
 
-      <section className="border bg-white px-6 py-4 w-7/12">
+      <section className="border  bg-white px-6 py-4 w-full md:w-7/12">
         <h1 className="font-extrabold mb-3 text-sm">Update Balance</h1>
-        <section className="flex gap-4">
+        <section className="flex flex-col gap-4">
           <Input 
             type='number' 
             placeholder='Enter new balance'
