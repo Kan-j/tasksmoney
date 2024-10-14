@@ -10,6 +10,7 @@ import { IoRefreshCircle } from 'react-icons/io5';
 import Link from 'next/link';
 import { revalidatePath } from 'next/cache';
 import { usePathname, useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 
 // Define Zod schema for validation
@@ -76,18 +77,18 @@ const CreateTask: React.FC = () => {
 
       if (!response.ok) {
         const errorData = await response.json();
-        alert(`Error: ${errorData.error || 'Failed to create task group'}`);
+        toast.error(`Error: ${errorData.error || 'Failed to create task group'}`);
        
         return;
       }
 
       const result = await response.json();
-      alert('Task Group created successfully!');
+      toast.success('Task Group created successfully!');
       router.push('/admin/dashboard/tasks')
       reset(); // Reset the form
     } catch (error:any) {
       console.error('Error creating task group:', error);
-      alert(error.message)
+      toast.error(error.message)
     }
   };
 

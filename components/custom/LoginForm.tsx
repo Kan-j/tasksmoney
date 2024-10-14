@@ -18,6 +18,7 @@ import { Input } from "@/components/ui/input"
 import { signIn } from "next-auth/react"
 import Link from "next/link"
 import { useRouter } from "next/navigation"
+import { toast } from "sonner"
 
 const formSchema = z.object({
   email: z.string().email({
@@ -50,11 +51,19 @@ export const LoginForm = () => {
       const result = await signIn("credentials", {
         email: values.email,
         password: values.password,
-        callbackUrl: "/",
-        
-      });
+        // callbackUrl: "/",
+        redirect: false
+      }).then(({ ok, error}:any) => {
+        if (ok) {
+            router.replace("/");
+        } else {
+            console.log(error)
+            toast.error("Credentials do not match!");
+        }
+    });
 
-    } catch (err) {
+    } catch (err:any) {
+      toast.error(err.message || "Something went wrong")
       // Catch any unexpected errors and display a generic error message
       setError("An error occurred while trying to log in. Please try again.");
     } finally {

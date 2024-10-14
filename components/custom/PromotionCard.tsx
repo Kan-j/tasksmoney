@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { FiTrash2 } from "react-icons/fi";
 import { IPromotion } from "@/lib/models/Promotion.model"; // Assuming you have an interface for Promotion
 import { deletePromotion, togglePromotionActive } from "@/lib/actions/promotion.actions";
+import { toast } from "sonner";
 
 interface PromotionCardProps {
   promotion: any; // Define prop type for promotion
@@ -17,12 +18,12 @@ interface PromotionCardProps {
   if (confirmed) {
     try {
       await deletePromotion(id);
-      alert("Promotion deleted successfully!");
       window.location.reload();
+      toast.success("Promotion deleted successfully!");
       // Optionally refresh the page or update the state here
     } catch (error) {
       console.error("Error deleting promotion:", error);
-      alert("Failed to delete the promotion.");
+      toast.error("Failed to delete the promotion.");
     }
   }
 };
@@ -31,12 +32,12 @@ interface PromotionCardProps {
 const handleToggleActive = async (id: string, isActive: boolean) => {
   try {
     await togglePromotionActive(id, { isActive }); // Call server action to toggle active state
-    alert(`Promotion ${!isActive ? 'deactivated' : 'activated'} successfully!`);
+    toast.success(`Promotion ${!isActive ? 'deactivated' : 'activated'} successfully!`);
     window.location.reload();
     // Optionally refresh the page or update the state here
   } catch (error) {
     console.error("Error toggling promotion active state:", error);
-    alert("Failed to toggle promotion active state.");
+    toast.error("Failed to toggle promotion active state.");
   }
 };
 

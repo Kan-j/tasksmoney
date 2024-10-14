@@ -2,6 +2,7 @@ import { LoginForm } from '@/components/custom/LoginForm';
 import { authOptions } from '@/lib/config/authOptions';
 import { getServerSession } from 'next-auth'
 import { redirect } from 'next/navigation';
+import { Toaster } from 'sonner';
 
 const LoginPage = async () => {
 
@@ -17,6 +18,7 @@ const LoginPage = async () => {
   return (
     <section className="flex flex-col w-full h-screen justify-center items-center">
       <LoginForm />
+      <Toaster position='top-center' richColors={true} />
     </section>
   );
 };

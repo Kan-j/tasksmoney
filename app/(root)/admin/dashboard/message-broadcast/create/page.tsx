@@ -6,6 +6,7 @@ import { Textarea } from '@/components/ui/textarea';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation'; // For navigation
 import { createMessageBroadcast } from '@/lib/actions/messageBroadcast.actions';
+import { toast } from 'sonner';
 
 const CreateMessageBroadcast = () => {
   const [message, setMessage] = useState('');
@@ -26,11 +27,14 @@ const CreateMessageBroadcast = () => {
       if (result.success) {
         setMessage(''); // Reset the form field after successful broadcast
         router.push('/admin/dashboard/message-broadcast'); // Redirect to the dashboard
+        toast.success("Message Broadcast Created")
       } else {
         setError('Failed to create the broadcast'); // Handle errors here
+        toast.error('Failed to create the broadcast')
       }
     } catch (error) {
       setError('An error occurred while creating the broadcast');
+      toast.error('An error occurred while creating the broadcast')
     } finally {
       setLoading(false); // Reset loading state
     }

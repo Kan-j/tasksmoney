@@ -5,6 +5,7 @@ import { Button } from '../ui/button';
 import { Loader2 } from 'lucide-react'; // For loading spinner
 import { approveRechargeRequest, rejectRechargeRequest } from '@/lib/actions/recharge.actions';
 import { format } from 'date-fns';
+import { toast } from 'sonner';
 
 const RechargeRequestTable = ({ rechargeRequests }: { rechargeRequests: any[] }) => {
   const [loading, setLoading] = useState<string | null>(null);
@@ -13,11 +14,11 @@ const RechargeRequestTable = ({ rechargeRequests }: { rechargeRequests: any[] })
     setLoading(rechargeRequestId);
     try {
       await approveRechargeRequest(rechargeRequestId);
-      alert('Recharge request approved successfully.');
+      toast.success('Recharge request approved successfully.');
       window.location.reload();
     } catch (error) {
       console.error('Error approving recharge request:', error);
-      alert('Failed to approve recharge request.');
+      toast.error('Failed to approve recharge request.');
     } finally {
       setLoading(null);
     }
@@ -27,11 +28,11 @@ const RechargeRequestTable = ({ rechargeRequests }: { rechargeRequests: any[] })
     setLoading(rechargeRequestId);
     try {
       await rejectRechargeRequest(rechargeRequestId);
-      alert('Recharge request rejected successfully.');
+      toast.success('Recharge request rejected successfully.');
       window.location.reload();
     } catch (error) {
       console.error('Error rejecting recharge request:', error);
-      alert('Failed to reject recharge request.');
+      toast.error('Failed to reject recharge request.');
     } finally {
       setLoading(null);
     }

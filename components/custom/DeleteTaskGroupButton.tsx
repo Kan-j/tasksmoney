@@ -9,6 +9,7 @@ import { IoTrashBin } from 'react-icons/io5';
 // Import the server action directly
 import { deleteTaskGroupAction } from '@/lib/actions/taskGroup.action'; // Ensure this path is correct
 import { FiTrash2 } from 'react-icons/fi';
+import { toast } from 'sonner';
 
 interface DeleteTaskGroupButtonProps {
   id: string;
@@ -34,6 +35,7 @@ const DeleteTaskGroupButton: React.FC<DeleteTaskGroupButtonProps> = ({ id }) => 
 
       // Refresh the page after successful deletion
       window.location.reload();
+      toast.success("Task Set Deleted")
     } catch (err: any) {
       setError(err.message);
     } finally {

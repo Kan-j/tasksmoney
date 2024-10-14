@@ -3,6 +3,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Button } from '../ui/button';
 import { approveWithdrawRequest, rejectWithdrawRequest } from '@/lib/actions/withdrawalRequest.actions'; // Assuming this is where the actions are
 import { Loader2 } from 'lucide-react';
+import { toast } from 'sonner';
 
 const TransactionTableWithActions = ({ withdrawRequests }: { withdrawRequests: any[] }) => {
   const [loading, setLoading] = useState<string | null>(null); // To handle loading state for each request
@@ -12,11 +13,11 @@ const TransactionTableWithActions = ({ withdrawRequests }: { withdrawRequests: a
     setLoading(withdrawRequestId); // Set loading state for the current row
     try {
       await approveWithdrawRequest(withdrawRequestId); // Call approve action
-      alert('Withdrawal request approved successfully.');
+      toast.success('Withdrawal request approved successfully.');
       window.location.reload(); // Reload to reflect changes
     } catch (error) {
       console.error('Error approving withdrawal request:', error);
-      alert('Failed to approve withdrawal request.');
+      toast.error('Failed to approve withdrawal request.');
     } finally {
       setLoading(null); // Reset loading state
     }
@@ -27,11 +28,11 @@ const TransactionTableWithActions = ({ withdrawRequests }: { withdrawRequests: a
     setLoading(withdrawRequestId); // Set loading state for the current row
     try {
       await rejectWithdrawRequest(withdrawRequestId); // Call reject action
-      alert('Withdrawal request rejected successfully.');
+      toast.success('Withdrawal request rejected successfully.');
       window.location.reload(); // Reload to reflect changes
     } catch (error) {
       console.error('Error rejecting withdrawal request:', error);
-      alert('Failed to reject withdrawal request.');
+      toast.error('Failed to reject withdrawal request.');
     } finally {
       setLoading(null); // Reset loading state
     }

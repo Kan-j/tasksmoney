@@ -16,7 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
-
+import {  toast } from 'sonner'
 // Define the schema using Zod
 const formSchema = z.object({
   username: z.string().min(3),
@@ -65,12 +65,16 @@ export const RegisterForm = ({referralCode}:{referralCode: string}) => {
 
       if (!res.ok) {
         const data = await res.json();
+        toast.error(data.message || "Something went wrong")
         throw new Error(data.message || "Failed to register");
       }
+      toast.success('Your account has been successfully created')
 
       // If successful, redirect to login or dashboard, depending on your logic
-      router.push("/login");
+      // router.push("/login");
+      form.reset()
     } catch (err: any) {
+      toast.error(err.message || "Something went wrong")
       setError(err.message || "Something went wrong"); // Set the error message
     } finally {
       setLoading(false); // Remove loading state

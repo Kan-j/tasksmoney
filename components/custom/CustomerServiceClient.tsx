@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 
 // Server action to fetch customer service data
 import { fetchCustomerService, updateOrCreateCustomerService } from '@/lib/actions/customerService.actions'; 
+import { toast } from 'sonner';
 
 const CustomerServiceClient = () => {
   const [telegramUrl, setTelegramUrl] = useState('');
@@ -40,6 +41,7 @@ const CustomerServiceClient = () => {
 
     try {
       await updateOrCreateCustomerService(telegramUrl, whatsappUrl); // Update or create customer service data
+      toast.success("Customer Service links updated")
       setHasData(true); // Assume data was successfully created or updated
       setError(null); // Reset error state
     } catch (error) {

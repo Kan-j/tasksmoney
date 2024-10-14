@@ -10,6 +10,7 @@ import { z } from 'zod';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { usePathname, useRouter } from 'next/navigation';
+import { toast } from 'sonner';
 
 // Define the form schema using Zod
 const editTaskGroupSchema = z.object({
@@ -83,13 +84,14 @@ const EditTaskGroupModal: React.FC<EditTaskGroupModalProps> = ({
       });
 
       if (!response.ok) {
-        alert('Failed to update task group');
+        toast.error('Failed to update task group');
       }
       window.location.reload();
+      toast.success("Task Group Edited")
     //   router.push(pathname);
     } catch (error) {
       console.error('Error updating task group:', error);
-      alert('Failed to update Task Group.');
+      toast.error('Failed to update Task Group.');
     } finally {
       setLoading(false); // Reset loading state
     }
