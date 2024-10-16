@@ -28,7 +28,7 @@ const NavigationBar = () => {
             <div className="grid gap-2 py-6">
     
               <Link
-                href="/about"
+                href="/"
                 className="flex w-full items-center py-2 text-lg font-semibold"
                 prefetch={false}
               >

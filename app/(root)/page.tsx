@@ -16,7 +16,7 @@ const Home = () => {
     <section className='w-full mx-auto max-w-[1436px]'>
         <NavigationBar/>
         {/* <HeroSection/> */}
-        <section className="w-full h-[420px] md:h-[500px] lg:h-[600px] bg-gray-100 flex items-center justify-center pt-32 md:pt-0">
+        <section className="w-full h-[420px] md:h-[500px] lg:h-[600px] bg-gray-100 flex items-center justify-center pt-48 mt-5 md:mt-0 md:pt-0">
           <section className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl px-6 md:px-12 place-items-center">
             {/* Text Section */}
             <section className="flex items-center justify-center">
