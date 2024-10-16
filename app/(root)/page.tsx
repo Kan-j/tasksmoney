@@ -1,22 +1,17 @@
+"use client"
 import FAQSection from '@/components/custom/FAQSection';
-import FAQAccordion from '@/components/custom/FaqSectionAccordion';
 import Footer from '@/components/custom/Footer';
 import HowItWorks from '@/components/custom/HowItWorks';
 import NavigationBar from '@/components/custom/NavigationBar';
-import { StepItem } from '@/components/custom/StepItem';
-import TestimonialsList from '@/components/custom/TestimonialList';
 import TestimonialSection from '@/components/custom/TestimonialSection';
 import { Button } from '@/components/ui/button';
-import { faqData } from '@/constants/faqData';
-import { authOptions } from '@/lib/config/authOptions';
-import { getServerSession } from 'next-auth';
 import Image from 'next/image';
 
-import { redirect } from 'next/navigation';
+import { redirect, useRouter } from 'next/navigation';
 import React from 'react'
 
-const Home = async() => {
-   
+const Home = () => {
+   const router = useRouter()
   return(
     <section className='w-full mx-auto max-w-[1436px]'>
         <NavigationBar/>
@@ -32,7 +27,7 @@ const Home = async() => {
                 <p className="mt-4 text-lg md:text-xl max-w-lg text-gray-600">
                   Join thousands of users who are earning extra cash by sharing their honest feedback on everyday products.
                 </p>
-                <Button className="w-fit mt-6">Start Earning Now</Button>
+                <Button className="w-fit mt-6" onClick={()=>{router.push('/login')}}>Start Earning Now</Button>
               </section>
             </section>
             {/* Image Section */}

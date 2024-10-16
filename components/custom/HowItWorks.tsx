@@ -3,7 +3,7 @@ import { StepItem } from './StepItem'
 
 const HowItWorks = () => {
   return (
-    <section className='w-full bg-gray-100 pt-20 md:pt-2'>
+    <section className='w-full bg-gray-100 pt-20 md:pt-2' id='how'>
           <h1 className="flex justify-center text-4xl font-bold">How it Works</h1>
 
 

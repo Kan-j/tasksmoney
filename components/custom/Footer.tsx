@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="bg-black py-10 text-white p-5">
+    <footer className="bg-black py-10 text-white p-5" id='footer'>
     <div className="grid grid-cols-1 gap-y-16 gap-x-10 sm:grid-cols-2 lg:grid-cols-6 bg-black py-10 text-white">
       {/* Footer first section */}
       <div className="-mt-2.5 lg:col-span-3">
@@ -94,7 +94,7 @@ const Footer = () => {
           href="mailto:Interpolcyber83@gmail.com"
           className="text-md text-gray-300"
         >
-          contact@interpol.int
+          contact@....int
         </Link>
       </div>
     </div>
