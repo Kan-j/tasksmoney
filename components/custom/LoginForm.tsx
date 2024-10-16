@@ -55,7 +55,7 @@ export const LoginForm = () => {
         redirect: false
       }).then(({ ok, error}:any) => {
         if (ok) {
-            router.replace("/");
+            router.replace("/investor/dashboard/profile");
         } else {
             console.log(error)
             toast.error("Credentials do not match!");
