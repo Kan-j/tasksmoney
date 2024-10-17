@@ -1,4 +1,4 @@
-"use client"; // To ensure the page runs on the client side
+"use client"; // Ensure the page runs on the client side
 import BalanceCard from '@/components/custom/BalanceCard';
 import DepositHistoryItem from '@/components/custom/DepositHistoryItem';
 import PromotionCarousel from '@/components/custom/PromotionalCarousel';
@@ -11,9 +11,9 @@ import { FaTelegram, FaWhatsapp } from 'react-icons/fa6';
 const Profile = () => {
   const [loading, setLoading] = useState(true); // Loading state
   const [financialSummary, setFinancialSummary] = useState<any>(null); // Holds financial data
-  const [showCustomerService, setShowCustomerService] = useState(false); // For showing the customer service options
+  const [showCustomerService, setShowCustomerService] = useState(false); // For showing customer service options
   const [customerServiceData, setCustomerServiceData] = useState<any>(null); // Holds customer service data
-  const [fetchError, setFetchError] = useState(false); // Error state in case fetching fails
+  const [fetchError, setFetchError] = useState(false); // Error state for fetching issues
 
   // Fetch customer service data and financial summary
   useEffect(() => {
@@ -36,7 +36,6 @@ const Profile = () => {
         } else {
           setFetchError(true); // Set error if no data found
         }
-
       } catch (error) {
         console.error("Error fetching data:", error);
         setFetchError(true); // Set error if there's an issue with fetching
@@ -62,12 +61,19 @@ const Profile = () => {
     }
   };
 
+  // Render loading state
   if (loading) {
     return <p>Loading...</p>; // Display a loading message or spinner
   }
 
+  // Render error state
+  if (fetchError) {
+    return <p className="text-red-500">Error fetching data. Please try again later.</p>;
+  }
+
+  // Render no data state
   if (!financialSummary) {
-    return <p>No data available.</p>; // Display a message if no data was fetched
+    return <p>No data available.</p>;
   }
 
   // Destructure data from financial summary
@@ -93,7 +99,11 @@ const Profile = () => {
 
       {/* Display active promotions */}
       <section className="my-6">
-        <PromotionCarousel promotions={activePromotions} />
+        {activePromotions.length > 0 ? (
+          <PromotionCarousel promotions={activePromotions} />
+        ) : (
+          <p>No active promotions available.</p>
+        )}
       </section>
 
       {/* Display deposit history */}
@@ -117,9 +127,10 @@ const Profile = () => {
           </article>
         </section>
       </section>
+
       {/* Floating customer service button */}
       <section className="fixed bottom-6 right-6">
-              <button 
+        <button 
           className="bg-orange-500 text-white p-4 rounded-full shadow-lg hover:bg-orange-600 transition-all"
           onClick={handleCustomerServiceClick}
         >
