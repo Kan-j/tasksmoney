@@ -14,18 +14,12 @@ const HowItWorks = () => {
               <StepItem number={'2'} header="Perform tasks." detail="Tasks are assigned to you where you for each task you get products to review." reverse={true}/>
               <StepItem number={'3'} header="Share Your Honest Opinion" detail="Submit detailed reviews based on your experience with the product." reverse={false}/>
               <StepItem number={'4'} header="Get Paid. 💰" detail="Earn money for each review and cash out easily anytime you want." reverse={true}/>
-              
-              {/* Step 2 */}
-            
-              {/* Step 3 */}
-              
-              {/* Step 4 */}
 
             </div>
           </section>
 
 
-        </section>
+    </section>
   )
 }
 

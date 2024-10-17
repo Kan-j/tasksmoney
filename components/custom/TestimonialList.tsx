@@ -23,59 +23,66 @@ function TestimonialsList() {
       image: "/assets/images/amos-henry.png",
       role: "Software Engineer",
       description:
-        "Working with Interpol has been invaluable in enhancing our cyber security measures and protecting our systems.",
+        "I was skeptical at first, but after creating an account and completing my first task, I received my first product to review! Sharing my honest opinions has never been more rewarding.",
     },
-
+  
     {
       name: "Brooklyn Simmons",
       image: "/assets/images/brooklyn-simmons.png",
       role: "IT Manager",
       description:
-        "Interpol's expertise has been crucial in developing robust security protocols and training our team on best practices.",
+        "Performing tasks and receiving products to review has been a fantastic experience. This platform offers a great opportunity to voice my thoughts on products and earn rewards for doing so!",
     },
+    
     {
       name: "Dr. Maria Fernandez",
       image: "/assets/images/dr-maria-fernandez.png",
-      role: "Head of Cyber Security, Global Security Inc.",
+      role: "Product Analyst",
       description:
-        "Interpol's commitment to fighting cybercrime is unparalleled. Their collaborative approach and advanced intelligence have significantly enhanced our ability to prevent and respond to cyber threats.",
+        "The platform’s straightforward process of reviewing products is highly satisfying. I love that I get to try new products while providing detailed feedback that matters.",
     },
+    
     {
       name: "Officer James Liu",
       image: "/assets/images/officer-james-liu.png",
-      role: "Cyber Crime Unit, New York Police Department",
+      role: "Customer Relations Specialist",
       description:
-        "Working with Interpol has provided us invaluable resources and support in combating international cybercrime. Their expertise and global network have greatly impacted our operations.",
+        "As soon as I completed a few tasks, I started receiving products to test. It's an amazing feeling knowing my reviews are helping improve these items.",
     },
+    
     {
       name: "Sophie Williams",
       image: "/assets/images/sophie-williams.png",
-      role: "Director, CyberSafe Foundation",
+      role: "Marketing Specialist",
       description:
-        "Our collaboration with Interpol has been a game-changer in educating the public about cyber threats. Their resources and training programs have empowered our community significantly.",
+        "Sharing my honest opinions on the products I receive is both fun and fulfilling. The process is seamless, and it's great to know that my feedback is valued.",
     },
+    
     {
       name: "Michael Chen",
       image: "/assets/images/michael-chen.png",
-      role: "CEO, SecureTech Solutions",
+      role: "Business Owner",
       description:
-        "Interpol's proactive stance on cybersecurity has provided us with the tools to protect our clients. Their support and strategies have been crucial for our success.",
+        "This platform has allowed me to engage with products in a way I never thought possible. The tasks are easy to follow, and reviewing products is both exciting and profitable.",
     },
+  
     {
       name: "Dr. Emily Thompson",
       image: "/assets/images/dr-emily-thompson.png",
-      role: "Professor of Cyber Security, University of Technology",
+      role: "Professor of Marketing",
       description:
-        "Partnering with Interpol has enriched our research and provided real-world insights into global cyber threats. Their data and capabilities are invaluable.",
+        "The opportunity to perform tasks and review products has expanded my knowledge of consumer goods. The platform is easy to use, and I enjoy sharing detailed reviews.",
     },
+  
     {
       name: "Raj Patel",
       image: "/assets/images/raj-patel.png",
-      role: "Owner, Patel Electronics",
+      role: "Retail Store Owner",
       description:
-        "Interpol's support has been vital in safeguarding our online transactions. Their advice and resources have helped us implement robust security measures.",
+        "Since joining, I've enjoyed every task and product I’ve reviewed. It’s amazing to try new items and be part of improving their quality through my feedback.",
     },
   ];
+  
 
   return (
     <div>

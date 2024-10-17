@@ -16,7 +16,7 @@ const Home = () => {
     <section className='w-full mx-auto max-w-[1436px]'>
         <NavigationBar/>
         {/* <HeroSection/> */}
-        <section className="w-full h-[420px] md:h-[500px] lg:h-[600px] bg-gray-100 flex items-center justify-center pt-48 mt-5 md:mt-0 md:pt-0">
+        <section className="w-full bg-gray-100 flex items-center justify-center pt-14  md:pb-0 mt-10 md:mt-0 md:pt-0">
           <section className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-7xl px-6 md:px-12 place-items-center">
             {/* Text Section */}
             <section className="flex items-center justify-center">
@@ -27,13 +27,13 @@ const Home = () => {
                 <p className="mt-4 text-lg md:text-xl max-w-lg text-gray-600">
                   Join thousands of users who are earning extra cash by sharing their honest feedback on everyday products.
                 </p>
-                <Button className="w-fit mt-6" onClick={()=>{router.push('/login')}}>Start Earning Now</Button>
+                <Button className="w-fit mt-6 text-lg" onClick={()=>{router.push('/login')}}>Start Earning Now</Button>
               </section>
             </section>
             {/* Image Section */}
             <section className="flex items-center justify-center">
               <Image 
-                className="w-[250px] md:w-[350px] lg:w-[450px] object- aspect-4/3" 
+                className="w-full object-contain aspect-4/3" 
                 alt="Hero Image" 
                 src={'/assets/images/heroImage.png'} 
                 width={450} 

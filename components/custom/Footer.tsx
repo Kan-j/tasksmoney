@@ -11,7 +11,7 @@ const Footer = () => {
           className="text-3xl lg:text-4xl font-bold mr-3 mb-5 max-w-[30rem]"
           style={{ lineHeight: "151%" }}
         >
-          Securing today for a safer tomorrow
+          Earn from Your Reviews Your Voice Counts!
         </h1>
         <div className="flex gap-4 items-center">
           <Link href="https://wa.me/qr/LIGL67KQQT6EC1" target="_blank">
