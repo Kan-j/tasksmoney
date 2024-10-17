@@ -24,17 +24,33 @@ const Profile = () => {
         const sessionData = await sessionRes.json();
         const userId = sessionData?.user?.id || null;
 
+         // Proceed if we have a valid userId
         if (userId) {
+          // Fetch user financial summary
           const summary = await getUserFinancialSummary(userId);
-          setFinancialSummary(summary); // Set the fetched financial summary data
+
+          // Ensure summary is valid and set it in state
+          if (summary) {
+            setFinancialSummary(summary);
+          } else {
+            // If summary is invalid or empty, set an appropriate error or default state
+            setFetchError(true);
+          }
         }
 
-        // Fetch customer service URLs
+        // Fetch customer service data
         const customerServiceRes = await fetchCustomerService();
+
         if (customerServiceRes.status === 'success') {
-          setCustomerServiceData(customerServiceRes.data);
+          setCustomerServiceData(customerServiceRes.data); // Set customer service data if successful
+        } else if (customerServiceRes.status === 'not_found') {
+          // Handle case where no customer service data is found
+          console.warn(customerServiceRes.message);
+          setCustomerServiceData(null); // Set customer service data to null if not found
         } else {
-          setFetchError(true); // Set error if no data found
+          // Handle error status returned from the API
+          setFetchError(true); 
+          console.error(customerServiceRes.message); // Log error message
         }
       } catch (error) {
         console.error("Error fetching data:", error);
