@@ -77,7 +77,7 @@ const Profile = () => {
   }
 
   // Destructure data from financial summary
-  const { totalAssets, totalCommissions, last10ApprovedRecharges, activePromotions } = financialSummary;
+  const { totalAssets = 0, totalCommissions = 0, last10ApprovedRecharges = [], activePromotions = [] } = financialSummary || {};
 
   return (
     <section className="relative w-full flex flex-col md:w-10/12 lg:w-8/12">

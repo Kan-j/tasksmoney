@@ -86,6 +86,46 @@ export async function getAllNonAdminUsersPaginated(page: number = 1, limit: numb
 
 
 // Define the server action to fetch the necessary data for a particular user
+// export const getUserFinancialSummary = async (userId: string) => {
+//   try {
+//     // Check if the userId is valid
+//     if (!Types.ObjectId.isValid(userId)) {
+//       throw new Error("Invalid user ID");
+//     }
+
+//     await connectToDatabase(); // Connect to MongoDB
+//     // 1. Get the user's total assets and total commissions
+//     const user = await User.findById(userId, "totalAssets totalCommissions");
+
+//     if (!user) {
+//       throw new Error("User not found");
+//     }
+
+//     // 2. Fetch the last 10 approved recharges for the user
+//     const approvedRecharges = await RechargeRequest.find({
+//       userId: userId,
+//       status: "approved",
+//     })
+//       .sort({ createdAt: -1 }) // Sort by latest recharges first
+//       .limit(10) // Limit to the last 10
+//       .lean(); // Use lean to return plain JavaScript objects
+
+//     // 3. Fetch all active promotions
+//     const activePromotions = await Promotion.find({ isActive: true }).lean();
+
+//     // Return the results
+//     return {
+//       totalAssets: user.totalAssets,
+//       totalCommissions: user.totalCommissions,
+//       last10ApprovedRecharges: JSON.parse(JSON.stringify(approvedRecharges)),
+//       activePromotions: JSON.parse(JSON.stringify(activePromotions)),
+//     };
+//   } catch (error) {
+//     console.error("Error fetching user financial summary:", error);
+//     throw new Error("Failed to retrieve user financial summary");
+//   }
+// };
+
 export const getUserFinancialSummary = async (userId: string) => {
   try {
     // Check if the userId is valid
@@ -94,14 +134,15 @@ export const getUserFinancialSummary = async (userId: string) => {
     }
 
     await connectToDatabase(); // Connect to MongoDB
-    // 1. Get the user's total assets and total commissions
+
+    // 1. Get the user's total assets and total commissions, or return default if not found
     const user = await User.findById(userId, "totalAssets totalCommissions");
 
-    if (!user) {
-      throw new Error("User not found");
-    }
+    // If no user is found, return default values for assets and commissions
+    const totalAssets = user?.totalAssets || 0;
+    const totalCommissions = user?.totalCommissions || 0;
 
-    // 2. Fetch the last 10 approved recharges for the user
+    // 2. Fetch the last 10 approved recharges for the user, or return an empty array if none
     const approvedRecharges = await RechargeRequest.find({
       userId: userId,
       status: "approved",
@@ -110,21 +151,28 @@ export const getUserFinancialSummary = async (userId: string) => {
       .limit(10) // Limit to the last 10
       .lean(); // Use lean to return plain JavaScript objects
 
-    // 3. Fetch all active promotions
+    // Ensure we return an empty array if no recharges are found
+    const last10ApprovedRecharges = approvedRecharges || [];
+
+    // 3. Fetch all active promotions, or return an empty array if none
     const activePromotions = await Promotion.find({ isActive: true }).lean();
 
-    // Return the results
+    // Ensure we return an empty array if no promotions are found
+    const activePromotionsList = activePromotions || [];
+
+    // Return the results, ensuring all fields have defaults if no data is found
     return {
-      totalAssets: user.totalAssets,
-      totalCommissions: user.totalCommissions,
-      last10ApprovedRecharges: JSON.parse(JSON.stringify(approvedRecharges)),
-      activePromotions: JSON.parse(JSON.stringify(activePromotions)),
+      totalAssets,
+      totalCommissions,
+      last10ApprovedRecharges: JSON.parse(JSON.stringify(last10ApprovedRecharges)),
+      activePromotions: JSON.parse(JSON.stringify(activePromotionsList)),
     };
   } catch (error) {
     console.error("Error fetching user financial summary:", error);
     throw new Error("Failed to retrieve user financial summary");
   }
 };
+
 
 
 
