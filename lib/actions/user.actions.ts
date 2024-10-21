@@ -6,6 +6,9 @@ import { connectToDatabase } from "../mongodb";
 import { Types } from "mongoose"; // For ObjectId type validation
 import bcrypt from 'bcrypt';
 import { revalidatePath } from "next/cache";
+import Wallet from "../models/Wallet.model";
+import WithdrawRequest from "../models/WithdrawalRequest.model";
+import UserTaskProgress from "../models/UserTasksProgress.model";
 
 
 
@@ -349,6 +352,13 @@ export async function deleteUserAction(userId: string): Promise<void> {
   try {
     await connectToDatabase();
     const deletedUser = await User.findByIdAndDelete(userId);
+     // 1. Delete all recharge requests associated with the user
+     await RechargeRequest.deleteMany({ userId });
+
+     // 2. Delete all transactions associated with the user (if you have a transactions model)
+     await Wallet.deleteMany({ userId });
+     await WithdrawRequest.deleteMany({ userId });
+     await UserTaskProgress.deleteMany({ userId });
     revalidatePath('/admin/dashboard/users')
     if (!deletedUser) {
       throw new Error("User not found or already deleted.");
