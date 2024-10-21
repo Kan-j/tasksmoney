@@ -35,7 +35,7 @@ const Home = () => {
               <Image 
                 className="w-full object-contain aspect-4/3" 
                 alt="Hero Image" 
-                src={'/assets/images/logo.png'} 
+                src={'/assets/images/heroImage.png'} 
                 width={450} 
                 height={360}
               />
