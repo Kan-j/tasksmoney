@@ -75,7 +75,7 @@ const CreateMessageBroadcast = () => {
 
           <div className="flex justify-end mt-3">
             <Button 
-              className="bg-orange-500 px-4" 
+              className="bg-mainColor px-4" 
               type="submit" 
               disabled={loading} // Disable button while loading
             >

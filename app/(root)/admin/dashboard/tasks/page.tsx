@@ -17,7 +17,7 @@ const TasksPage = async () => {
             <h1 className="text-2xl font-extrabold mb-4">Manage Tasks</h1>
           </section>
 
-          <Link href="/admin/dashboard/tasks/create"  className="bg-orange-500 flex justify-center items-center h-fit text-white hover:bg-orange-600 px-4 py-2 rounded-md">Create Task</Link>
+          <Link href="/admin/dashboard/tasks/create"  className="bg-mainColor flex justify-center items-center h-fit text-white hover:bg-mainColorOnHover px-4 py-2 rounded-md">Create Task</Link>
         </section>
         <h3 className="text-gray-700 w-4/5">Create tasks and manage task settings</h3>
       </section>

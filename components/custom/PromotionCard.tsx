@@ -46,7 +46,7 @@ const PromotionCard: React.FC<PromotionCardProps> = ({ promotion }) => {
   return (
     <Card className="relative border border-gray-300">
       {/* Promotions Badge */}
-      <Badge variant="secondary" className="absolute top-2 right-2 bg-black text-orange-500 px-3 py-1">
+      <Badge variant="secondary" className="absolute top-2 right-2 bg-black text-mainColor px-3 py-1">
         Promotions
       </Badge>
       

@@ -192,7 +192,7 @@ const CreateTask: React.FC = () => {
                 </div>
 
                 <div className="col-span-2 flex justify-center mt-4 gap-6">
-                  <Button type="submit" className="w-full bg-orange-500 hover:bg-orange-600">
+                  <Button type="submit" className="w-full bg-mainColor hover:bg-mainColorOnHover">
                     Create Task Group
                   </Button>
 

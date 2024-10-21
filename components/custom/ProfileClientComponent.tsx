@@ -100,7 +100,7 @@ const Profile = () => {
       <section className="flex flex-col mb-7">
         <section className="flex justify-between">
           <h1 className="md:text-2xl text-lg font-extrabold">Profile</h1>
-          <Link href="/investor/dashboard/withdrawal/create" className="bg-orange-500 flex justify-center items-center h-fit text-white hover:bg-orange-600 px-4 py-2 rounded-md">
+          <Link href="/investor/dashboard/withdrawal/create" className="bg-mainColor flex justify-center items-center h-fit text-white hover:bg-mainColorOnHover px-4 py-2 rounded-md">
             Withdraw
           </Link>
         </section>
@@ -147,7 +147,7 @@ const Profile = () => {
       {/* Floating customer service button */}
       <section className="fixed bottom-6 right-6">
         <button 
-          className="bg-orange-500 text-white p-4 rounded-full shadow-lg hover:bg-orange-600 transition-all"
+          className="bg-mainColor text-white p-4 rounded-full shadow-lg hover:bg-mainColorOnHover transition-all"
           onClick={handleCustomerServiceClick}
         >
           💬

@@ -74,7 +74,7 @@ const UserProfile = ({ userId }: any) => {
             value={newBalance !== null ? newBalance : ''} 
             onChange={(e) => setNewBalance(Number(e.target.value))} 
           />
-          <Button className='bg-orange-500' onClick={handleUpdateBalance}>Update Balance</Button>
+          <Button className='bg-mainColor' onClick={handleUpdateBalance}>Update Balance</Button>
         </section>
         {error && <p className="text-red-500 mt-2">{error}</p>} {/* Display error message */}
       </section>

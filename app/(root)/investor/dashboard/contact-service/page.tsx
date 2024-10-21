@@ -52,7 +52,7 @@ const ContactService = () => {
         {/* Telegram button */}
         {customerServiceData?.telegramUrl ? (
           <button
-            className="flex items-center gap-3 text-left w-full py-2 px-4 hover:bg-orange-100 rounded-md transition-all mb-4"
+            className="flex items-center gap-3 text-left w-full py-2 px-4 hover:bg-mainColorOnHover rounded-md transition-all mb-4"
             onClick={() => handleContactOption('telegram')}
           >
             <FaTelegram size={24} className="text-blue-500" />
@@ -60,7 +60,7 @@ const ContactService = () => {
           </button>
         ) : (
           <button
-            className="flex items-center gap-3 text-left w-full py-2 px-4 text-orange-400 cursor-not-allowed rounded-md mb-4"
+            className="flex items-center gap-3 text-left w-full py-2 px-4 text-mainColor cursor-not-allowed rounded-md mb-4"
             disabled
           >
             <FaTelegram size={24} className="text-gray-400" />
@@ -71,7 +71,7 @@ const ContactService = () => {
         {/* WhatsApp button */}
         {customerServiceData?.whatsappUrl ? (
           <button
-            className="flex items-center gap-3 text-left w-full py-2 px-4 hover:bg-orange-100 rounded-md transition-all"
+            className="flex items-center gap-3 text-left w-full py-2 px-4 hover:bg-mainColorOnHover rounded-md transition-all"
             onClick={() => handleContactOption('whatsapp')}
           >
             <FaWhatsapp size={24} className="text-green-500" />

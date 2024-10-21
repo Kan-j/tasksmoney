@@ -67,11 +67,13 @@ const RechargeRequestTable = ({ rechargeRequests }: { rechargeRequests: any[] })
           {/* Table Body */}
           <TableBody>
             {rechargeRequests.length > 0 ? (
-              rechargeRequests.map((request) => (
+              rechargeRequests.map((request) => {
+                const userEmail = request.userId?.email || 'Unknown';
+                return (
                 <TableRow key={request._id} className="bg-white hover:bg-gray-50">
                   
                   <TableCell className="px-6 py-4 text-left font-medium text-gray-900">
-                    {request.userId.email}
+                    {userEmail}
                   </TableCell>
                   <TableCell className="px-6 py-4 text-right font-medium text-gray-900">
                     {request.amount} USDT
@@ -119,7 +121,7 @@ const RechargeRequestTable = ({ rechargeRequests }: { rechargeRequests: any[] })
                     </TableCell>
                   )}
                 </TableRow>
-              ))
+              )})
             ) : (
               <TableRow>
                 <TableCell colSpan={5} className="text-center py-6">

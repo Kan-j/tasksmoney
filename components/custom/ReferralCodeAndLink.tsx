@@ -53,7 +53,7 @@ const ReferralCodeAndLink: React.FC<Props> = ({ userId }) => {
       <h2 className="text-xl font-bold mb-4">Referral Code</h2>
       <div className="flex justify-between items-center">
         <p
-          className={`text-base font-bold mb-4 ${copiedText === referralCode ? 'text-green-500' : 'text-orange-500'}`}
+          className={`text-base font-bold mb-4 ${copiedText === referralCode ? 'text-green-500' : 'text-mainColor'}`}
         >
           {referralCode ? referralCode : 'No referral code available'}
         </p>
@@ -74,7 +74,7 @@ const ReferralCodeAndLink: React.FC<Props> = ({ userId }) => {
       <h2 className="text-xl font-bold mb-4">Referral Link</h2>
       <div className="flex justify-between items-center">
         <p
-          className={`text-base font-bold ${copiedText === referralLink ? 'text-green-500' : 'text-orange-500'}`}
+          className={`text-base font-bold ${copiedText === referralLink ? 'text-green-500' : 'text-mainColor'}`}
         >
           {referralLink ? referralLink : 'No referral link available'}
         </p>

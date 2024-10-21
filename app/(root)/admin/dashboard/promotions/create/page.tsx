@@ -101,7 +101,7 @@ const CreatePromotion = () => {
 
         <div className="flex justify-end mt-3">
           <Button 
-            className="bg-orange-500 px-4" 
+            className="bg-mainColor px-4" 
             type="submit" 
             disabled={loading} // Disable button while loading
           >
@@ -178,7 +178,7 @@ export default CreatePromotion;
 //             </label>
 //           </div>
 //           <div className="flex justify-end mt-3">
-//             <Button className="bg-orange-500 px-4" type="submit">
+//             <Button className="bg-mainColor px-4" type="submit">
 //               Add Promotion
 //             </Button>
 //           </div>
@@ -227,7 +227,7 @@ export default CreatePromotion;
 //                     <Textarea placeholder="Type your message here." />
 //                 </div>
 //                 <div className="flex justify-end mt-3">
-//                     <Button className='bg-orange-500 px-4'>Add Promotion</Button>
+//                     <Button className='bg-mainColor px-4'>Add Promotion</Button>
 //                 </div>
 //             </section>
 //         </section>

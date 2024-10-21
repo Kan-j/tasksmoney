@@ -7,19 +7,19 @@ const TermsAndConditions = () => {
 
       <nav>
         <ul className="pl-4 space-y-1">
-          <li><a href="#acceptance" className="text-orange-500 hover:underline">1. Acceptance of Terms</a></li>
-          <li><a href="#eligibility" className="text-orange-500 hover:underline">2. Eligibility</a></li>
-          <li><a href="#user-responsibilities" className="text-orange-500 hover:underline">3. User Responsibilities</a></li>
-          <li><a href="#payment-rewards" className="text-orange-500 hover:underline">4. Payment and Rewards</a></li>
-          <li><a href="#account-binding" className="text-orange-500 hover:underline">5. Account Binding</a></li>
-          <li><a href="#intellectual-property" className="text-orange-500 hover:underline">6. Intellectual Property</a></li>
-          <li><a href="#limitation-liability" className="text-orange-500 hover:underline">7. Limitation of Liability</a></li>
-          <li><a href="#privacy-policy" className="text-orange-500 hover:underline">8. Privacy Policy</a></li>
-          <li><a href="#termination" className="text-orange-500 hover:underline">9. Termination of Service</a></li>
-          <li><a href="#changes" className="text-orange-500 hover:underline">10. Changes to Terms</a></li>
-          <li><a href="#governing-law" className="text-orange-500 hover:underline">11. Governing Law</a></li>
-          <li><a href="#contact" className="text-orange-500 hover:underline">12. Contact Us</a></li>
-          <li><a href="#faq" className="text-orange-500 hover:underline">Frequently Asked Questions</a></li>
+          <li><a href="#acceptance" className="text-mainColor hover:underline">1. Acceptance of Terms</a></li>
+          <li><a href="#eligibility" className="text-mainColor hover:underline">2. Eligibility</a></li>
+          <li><a href="#user-responsibilities" className="text-mainColor hover:underline">3. User Responsibilities</a></li>
+          <li><a href="#payment-rewards" className="text-mainColor hover:underline">4. Payment and Rewards</a></li>
+          <li><a href="#account-binding" className="text-mainColor hover:underline">5. Account Binding</a></li>
+          <li><a href="#intellectual-property" className="text-mainColor hover:underline">6. Intellectual Property</a></li>
+          <li><a href="#limitation-liability" className="text-mainColor hover:underline">7. Limitation of Liability</a></li>
+          <li><a href="#privacy-policy" className="text-mainColor hover:underline">8. Privacy Policy</a></li>
+          <li><a href="#termination" className="text-mainColor hover:underline">9. Termination of Service</a></li>
+          <li><a href="#changes" className="text-mainColor hover:underline">10. Changes to Terms</a></li>
+          <li><a href="#governing-law" className="text-mainColor hover:underline">11. Governing Law</a></li>
+          <li><a href="#contact" className="text-mainColor hover:underline">12. Contact Us</a></li>
+          <li><a href="#faq" className="text-mainColor hover:underline">Frequently Asked Questions</a></li>
         </ul>
       </nav>
 

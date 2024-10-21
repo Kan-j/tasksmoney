@@ -49,32 +49,79 @@ export interface PaginatedUsersResponse {
   currentPage: number;
 }
 
-export async function getAllNonAdminUsersPaginated(page: number = 1, limit: number = 10): Promise<PaginatedUsersResponse> {
-  try {
+// export async function getAllNonAdminUsersPaginated(page: number = 1, limit: number = 10): Promise<PaginatedUsersResponse> {
+//   try {
 
+//     await connectToDatabase(); // Connect to MongoDB
+    
+//     // Validate input parameters
+//     const currentPage = Math.max(1, page);
+//     const pageSize = Math.max(1, Math.min(limit, 100)); // Limit max to 100 for performance
+
+//     // Calculate the number of users to skip
+//     const skip = (currentPage - 1) * pageSize;
+
+//     // Retrieve users who are not admins with pagination
+//     const users = await User.find({ isAdmin: false })
+//       .skip(skip)
+//       .limit(pageSize)
+//       .exec();
+
+//     // Get the total number of non-admin users for pagination metadata
+//     const totalUsers = await User.countDocuments({ isAdmin: false });
+
+//     // Calculate total pages
+//     const totalPages = Math.ceil(totalUsers / pageSize);
+
+//     return {
+//       users,
+//       totalUsers,
+//       totalPages,
+//       currentPage,
+//     };
+//   } catch (error: any) {
+//     throw new Error(`Error retrieving non-admin users: ${error.message}`);
+//   }
+// }
+
+export async function getAllNonAdminUsersPaginated(
+  page: number = 1, 
+  limit: number = 10, 
+  searchQuery: string = ''
+): Promise<PaginatedUsersResponse> {
+  try {
     await connectToDatabase(); // Connect to MongoDB
     
     // Validate input parameters
     const currentPage = Math.max(1, page);
     const pageSize = Math.max(1, Math.min(limit, 100)); // Limit max to 100 for performance
-
-    // Calculate the number of users to skip
     const skip = (currentPage - 1) * pageSize;
 
-    // Retrieve users who are not admins with pagination
-    const users = await User.find({ isAdmin: false })
+    // Build the search filter
+    const searchFilter = { 
+      isAdmin: false,
+      ...(searchQuery ? { 
+        $or: [ // Search by username or email
+          { username: { $regex: searchQuery, $options: 'i' } }, 
+          { email: { $regex: searchQuery, $options: 'i' } }
+        ] 
+      } : {}) 
+    };
+
+    // Retrieve users who are not admins, with pagination and optional search
+    const users = await User.find(searchFilter)
       .skip(skip)
       .limit(pageSize)
       .exec();
 
-    // Get the total number of non-admin users for pagination metadata
-    const totalUsers = await User.countDocuments({ isAdmin: false });
+    // Get the total number of matching non-admin users for pagination
+    const totalUsers = await User.countDocuments(searchFilter);
 
     // Calculate total pages
     const totalPages = Math.ceil(totalUsers / pageSize);
 
     return {
-      users,
+      users: JSON.parse(JSON.stringify(users)),
       totalUsers,
       totalPages,
       currentPage,
@@ -83,6 +130,7 @@ export async function getAllNonAdminUsersPaginated(page: number = 1, limit: numb
     throw new Error(`Error retrieving non-admin users: ${error.message}`);
   }
 }
+
 
 
 // Define the server action to fetch the necessary data for a particular user

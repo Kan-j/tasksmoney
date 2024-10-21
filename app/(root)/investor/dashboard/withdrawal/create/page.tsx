@@ -88,7 +88,7 @@ const CreateWithdrawalRequest = () => {
           <h1 className="text-2xl font-extrabold">Create Withdrawal Request</h1>
           <Link
             href="/investor/dashboard/withdrawal/binding"
-            className="bg-orange-500 flex justify-center items-center h-fit text-white hover:bg-orange-600 px-4 py-2 rounded-md"
+            className="bg-mainColor flex justify-center items-center h-fit text-white hover:bg-mainColorOnHover px-4 py-2 rounded-md"
           >
             Create Wallet
           </Link>
@@ -107,7 +107,7 @@ const CreateWithdrawalRequest = () => {
             <div
               key={wallet._id}
               className={`flex justify-between p-4 my-2 border rounded-md ${
-                selectedWallet === wallet._id ? "border-orange-500" : "border-gray-300"
+                selectedWallet === wallet._id ? "border-mainColor" : "border-gray-300"
               } cursor-pointer`}
               onClick={() => handleWalletSelect(wallet._id)}
             >
@@ -131,7 +131,7 @@ const CreateWithdrawalRequest = () => {
           {/* Submit Button */}
           <div className="flex justify-end mt-4">
             <Button
-              className="bg-orange-500"
+              className="bg-mainColor"
               onClick={handleSubmit}
               disabled={submitting} // Disable button during submission
             >
@@ -144,7 +144,7 @@ const CreateWithdrawalRequest = () => {
         <section className="flex flex-col items-center mt-6">
           <h3 className="text-gray-700">No wallets found. Please create a wallet to proceed.</h3>
           <Link href="/investor/dashboard/withdrawal/binding">
-            <Button className="mt-4 bg-orange-500">Create Wallet</Button>
+            <Button className="mt-4 bg-mainColor">Create Wallet</Button>
           </Link>
         </section>
       )}

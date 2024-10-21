@@ -105,7 +105,7 @@ const CustomerServiceClient = () => {
 
           {/* Submit Button */}
           <div className="flex justify-end mt-3">
-            <Button className="bg-orange-500 px-4" type="submit" disabled={loading}>
+            <Button className="bg-mainColor px-4" type="submit" disabled={loading}>
               {loading ? 'Saving...' : hasData ? 'Update' : 'Create'}
             </Button>
           </div>

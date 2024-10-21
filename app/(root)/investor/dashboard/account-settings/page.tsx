@@ -81,7 +81,7 @@ const AccountSettings = () => {
         onChange={(e) => setConfirmPassword(e.target.value)}
         className="mb-3"
       />
-      <Button onClick={handleChangePassword} className="bg-orange-500 text-white">
+      <Button onClick={handleChangePassword} className="bg-mainColor text-white">
         Change Password
       </Button>
     </section>

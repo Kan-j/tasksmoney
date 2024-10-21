@@ -14,7 +14,7 @@ const Promotions = async () => {
       <section className="flex flex-col mb-7">
         <section className="flex justify-between">
           <h1 className="text-2xl font-extrabold">Promotions</h1>
-          <Link href="/admin/dashboard/promotions/create" className="bg-orange-500 flex justify-center items-center h-fit text-white hover:bg-orange-600 px-4 py-2 rounded-md">
+          <Link href="/admin/dashboard/promotions/create" className="bg-mainColor flex justify-center items-center h-fit text-white hover:bg-mainColorOnHover px-4 py-2 rounded-md">
             Create Promotion
           </Link>
         </section>

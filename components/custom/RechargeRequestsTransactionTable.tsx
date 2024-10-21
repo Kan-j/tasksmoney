@@ -31,7 +31,7 @@ const RechargeRequestsTransactionTable = ({ transactions }:{transactions: any}) 
                     transaction.status === 'approved'
                     ? 'text-green-600' // Green for approved
                     : transaction.status === 'pending'
-                    ? 'text-orange-600' // Orange for pending
+                    ? 'text-mainColorOnHover' // Orange for pending
                     : 'text-red-600' // Red for rejected
                 }`}>
                 {transaction.status}

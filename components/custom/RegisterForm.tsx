@@ -155,7 +155,7 @@ export const RegisterForm = ({referralCode}:{referralCode: string}) => {
           {/* Submit Button */}
           <Button
             type="submit"
-            className="w-full bg-orange-500 hover:bg-orange-700 mt-6 mb-3 text-white"
+            className="w-full bg-mainColor hover:bg-mainColorOnHover mt-6 mb-3 text-white"
             disabled={loading}
           >
             {loading ? "Signing Up..." : "Sign Up"}

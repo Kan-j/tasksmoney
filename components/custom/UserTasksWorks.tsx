@@ -195,7 +195,7 @@ const UserTasksWorks = ({ userId }: any) => {
                 </Select>
 
                 <Button
-                  className="mt-5 bg-orange-500 hover:bg-orange-600"
+                  className="mt-5 bg-mainColor hover:bg-mainColorOnHover"
                   onClick={handleSubmitReview}
                   disabled={isSubmitting} // Disable the button while submitting
                 >

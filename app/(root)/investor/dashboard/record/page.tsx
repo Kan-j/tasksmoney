@@ -19,7 +19,7 @@ const Record = () => {
                   <h3 className="text-gray-700 w-4/5">View all your past transactions and activity in one place.</h3>
                 </section>
                 
-                {/* <Button className='bg-orange-500'>Withdraw</Button> */}
+                {/* <Button className='bg-mainColor'>Withdraw</Button> */}
                 <section className=" ">
                   <Select >
                     <SelectTrigger className="">

@@ -21,7 +21,7 @@ const LeftSideBar: React.FC<LeftSideBarProps> = ({ isAdmin }) => {
 
   return (
     <section className="sticky left-0 top-0 z-20 flex h-screen w-fit flex-col justify-between overflow-auto border-r border-r-dark-4 bg-white pb-5 pt-20 max-md:hidden">
-      <div className="flex w-full flex-1 flex-col gap-1 px-6 bg-white">
+      <div className="flex w-full flex-1 flex-col gap-1 px-6 pt-6 bg-white">
         {/* Map over the appropriate links array */}
         {links.map((link: any) => {
           const isActive =
@@ -32,7 +32,7 @@ const LeftSideBar: React.FC<LeftSideBarProps> = ({ isAdmin }) => {
               href={link.route}
               key={link.label}
               className={`relative flex justify-start gap-4 rounded-lg p-4 ${
-                isActive && 'bg-orange-500 text-white '
+                isActive && 'bg-mainColor text-white '
               }`}
             >
               {link.icon}

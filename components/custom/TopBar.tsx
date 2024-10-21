@@ -28,7 +28,7 @@ const TopBar = ({ isAdmin }: { isAdmin: boolean }) => {
       {/* Logo Section */}
       <div className="flex items-center gap-4">
         <Link href="/" className="text-gray-700 hover:bg-transparent font-bold text-xl py-2">
-          Logo
+         <Image src="/assets/images/logo.png" className="object-cover" alt="alt" width={180} height={140} />
         </Link>
       </div>
 
@@ -44,7 +44,7 @@ const TopBar = ({ isAdmin }: { isAdmin: boolean }) => {
           <div className="relative flex items-center">
             <Link href="/investor/dashboard/notification" className="flex items-center text-gray-500 hover:text-black">
               <CiBellOn size={24} />
-              <div className="absolute top-0 right-0 h-2 w-2 bg-orange-500 rounded-full"></div>
+              <div className="absolute top-0 right-0 h-2 w-2 bg-mainColor rounded-full"></div>
               <span className="ml-1">
                 <MdArrowDropDown size={24} />
               </span>

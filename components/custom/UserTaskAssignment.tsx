@@ -84,7 +84,7 @@ const UserTaskAssignment = ({ userId }: any) => {
 
       <section className="flex justify-end">
         <Button
-          className="mt-5 bg-orange-500 hover:bg-orange-600"
+          className="mt-5 bg-mainColor hover:bg-mainColorOnHover"
           disabled={taskInProgress || !selectedTaskGroup || assigning}
           onClick={handleSetTask}
         >

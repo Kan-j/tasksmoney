@@ -109,7 +109,7 @@ const WithdrawalBinding = () => {
           <div className="col-span-2 flex justify-center mt-4">
             <Button
               type="submit"
-              className="w-full bg-orange-500 hover:bg-orange-600"
+              className="w-full bg-mainColor hover:bg-mainColorOnHover"
               disabled={isLoading}
             >
               {isLoading ? 'Submitting...' : 'Submit'}

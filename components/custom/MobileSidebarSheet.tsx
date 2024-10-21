@@ -44,7 +44,7 @@ const MobileSidebarSheet: React.FC<MobileSidebarSheetProps> = ({ isOpen, setIsOp
                 href={link.route}
                 key={link.label}
                 className={`relative flex justify-start gap-4 rounded-lg p-4 ${
-                    isActive && 'bg-orange-500 text-white '
+                    isActive && 'bg-mainColor text-white '
                 }`}
                 onClick={() => setIsOpen(false)}
                 >

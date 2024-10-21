@@ -19,7 +19,7 @@ const BalanceUpdateModal: React.FC<BalanceUpdateModalProps> = ({ message, onClos
           </button>
         </div>
         <p className="text-gray-700 mb-6">{message}</p>
-        <Link href="/investor/dashboard/recharge/create" className="bg-orange-500 flex justify-center items-center h-fit text-white hover:bg-orange-600 px-4 py-2 rounded-md">
+        <Link href="/investor/dashboard/recharge/create" className="bg-mainColor flex justify-center items-center h-fit text-white hover:bg-mainColorOnHover px-4 py-2 rounded-md">
             Update Balance
           </Link>
       </div>

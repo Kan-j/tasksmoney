@@ -8,7 +8,7 @@
         // <section className="flex flex-col mb-7">
         //     <section className="flex justify-between">
         //         <h1 className="text-2xl font-extrabold">Withdraw Amount</h1>
-        //         <Button className='bg-orange-500'>Bind Account</Button>
+        //         <Button className='bg-mainColor'>Bind Account</Button>
         //     </section>
         //     <h3 className="text-gray-700 mt-4">To ensure a smooth withdrawal process, please provide accurate account details for binding. We currently support USDT, BTC, TRC20, ETH, and more. Inaccurate information may delay your withdrawals.</h3>
         // </section>
@@ -37,7 +37,7 @@
 //               </div>
 
 //               <div className="col-span-2  flex justify-center mt-4">
-//                 <Button className='w-full bg-orange-500 hover:bg-orange-600'>Submit</Button>
+//                 <Button className='w-full bg-mainColor hover:bg-mainColorOnHover'>Submit</Button>
 //               </div>
               
 //             </section>
@@ -110,7 +110,7 @@ const WithdrawalsPage = ({ searchParams }: { searchParams: any }) => {
           <h1 className="text-2xl font-extrabold">Withdraw Requests</h1>
           <Link
             href="/investor/dashboard/withdrawal/create"
-            className="bg-orange-500 flex justify-center items-center h-fit text-white hover:bg-orange-600 px-4 py-2 rounded-md"
+            className="bg-mainColor flex justify-center items-center h-fit text-white hover:bg-mainColorOnHover px-4 py-2 rounded-md"
           >
             Create Withdrawal Request
           </Link>
@@ -155,7 +155,7 @@ const WithdrawalsPage = ({ searchParams }: { searchParams: any }) => {
                           withdrawal.status === "approved"
                             ? "text-green-600"
                             : withdrawal.status === "pending"
-                            ? "text-orange-600"
+                            ? "text-mainColorOnHover"
                             : "text-red-600"
                         }`}
                       >

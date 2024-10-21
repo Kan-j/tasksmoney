@@ -8,6 +8,7 @@ const RechargeClientComponent = () => {
   const [loading, setLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
+  const [fetchError, setFetchError] = useState(false); // Error state
   const limit = 10; // Items per page
 
   // Fetch recharge requests based on the current page
@@ -16,10 +17,17 @@ const RechargeClientComponent = () => {
       setLoading(true);
       try {
         const { rechargeRequests, totalPages } = await getAllRechargeRequests(currentPage, limit);
-        setRechargeRequests(rechargeRequests);
-        setTotalPages(totalPages);
+        console.log(rechargeRequests)
+        if (rechargeRequests.length > 0) {
+          setRechargeRequests(rechargeRequests);
+          setTotalPages(totalPages);
+        } else {
+          setRechargeRequests([]); // No recharge requests found
+          setTotalPages(0); // No pages if there's no data
+        }
       } catch (error) {
         console.error("Failed to fetch recharge requests:", error);
+        setFetchError(true); // Handle fetch error
       } finally {
         setLoading(false);
       }
@@ -46,6 +54,14 @@ const RechargeClientComponent = () => {
     return <p>Loading...</p>; // Loading state
   }
 
+  if (fetchError) {
+    return <p className="text-red-500">Error fetching recharge requests. Please try again later.</p>;
+  }
+
+  if (rechargeRequests.length === 0) {
+    return <p className="text-gray-500">No recharge requests available.</p>; // Empty state
+  }
+
   return (
     <section className="flex flex-col md:w-10/12 lg:w-8/12">
       <section className="flex flex-col mb-4">
@@ -64,7 +80,7 @@ const RechargeClientComponent = () => {
         <button
           onClick={handlePreviousPage}
           disabled={currentPage === 1}
-          className={`px-4 py-2 rounded-md ${currentPage === 1 ? 'bg-gray-300' : 'bg-orange-500 text-white'}`}
+          className={`px-4 py-2 rounded-md ${currentPage === 1 ? 'bg-gray-300' : 'bg-mainColor text-white'}`}
         >
           Previous
         </button>
@@ -75,8 +91,8 @@ const RechargeClientComponent = () => {
 
         <button
           onClick={handleNextPage}
-          disabled={currentPage === totalPages}
-          className={`px-4 py-2 rounded-md ${currentPage === totalPages ? 'bg-gray-300' : 'bg-orange-500 text-white'}`}
+          disabled={currentPage === totalPages || totalPages === 0}
+          className={`px-4 py-2 rounded-md ${currentPage === totalPages || totalPages === 0 ? 'bg-gray-300' : 'bg-mainColor text-white'}`}
         >
           Next
         </button>

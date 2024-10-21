@@ -60,6 +60,31 @@ export async function getUserRechargeRequests(
 }
 
 
+// export async function getAllRechargeRequests(page: number = 1, limit: number = 10) {
+//   try {
+//     await connectToDatabase();
+
+//     const rechargeRequests = await RechargeRequest.find({})
+//       .populate({
+//         path: 'userId', // Populate user details if needed
+//         select: 'email', // Select specific user fields
+//       })
+//       .skip((page - 1) * limit)
+//       .limit(limit)
+//       .sort({ createdAt: -1 }); // Sort by most recent first
+
+//     const totalCount = await RechargeRequest.countDocuments();
+
+//     return {
+//       rechargeRequests: JSON.parse(JSON.stringify(rechargeRequests)),
+//       totalPages: Math.ceil(totalCount / limit),
+//       currentPage: page,
+//     };
+//   } catch (error: any) {
+//     throw new Error(`Failed to fetch all recharge requests: ${error.message}`);
+//   }
+// }
+
 export async function getAllRechargeRequests(page: number = 1, limit: number = 10) {
   try {
     await connectToDatabase();
@@ -71,9 +96,18 @@ export async function getAllRechargeRequests(page: number = 1, limit: number = 1
       })
       .skip((page - 1) * limit)
       .limit(limit)
-      .sort({ createdAt: -1 }); // Sort by most recent first
+      .sort({ createdAt: -1 });
 
     const totalCount = await RechargeRequest.countDocuments();
+
+    // Handle case when no recharge requests are found
+    if (!rechargeRequests || rechargeRequests.length === 0) {
+      return {
+        rechargeRequests: [],
+        totalPages: 0,
+        currentPage: page,
+      };
+    }
 
     return {
       rechargeRequests: JSON.parse(JSON.stringify(rechargeRequests)),
@@ -84,6 +118,7 @@ export async function getAllRechargeRequests(page: number = 1, limit: number = 1
     throw new Error(`Failed to fetch all recharge requests: ${error.message}`);
   }
 }
+
 
 // 4. Approve a Recharge Request (Admin)
 export async function approveRechargeRequest(rechargeRequestId: string) {

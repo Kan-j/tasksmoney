@@ -26,7 +26,7 @@ const PromotionCarousel = ({promotions}:any) => {
   return (
     <div className="relative bg-white border border-gray-200 rounded-lg p-6 w-full max-w-2xl mx-auto">
       {/* Promotions Tag */}
-      <div className="absolute top-0 right-0 bg-black text-orange-400 py-1 px-3 rounded-bl-lg rounded-tr-lg text-xs font-semibold">
+      <div className="absolute top-0 right-0 bg-black text-mainColor py-1 px-3 rounded-bl-lg rounded-tr-lg text-xs font-semibold">
         Promotions
       </div>
 

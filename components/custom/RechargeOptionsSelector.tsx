@@ -51,7 +51,7 @@ export default function RechargeOptionsSelector({ userId }: RechargeOptionsSelec
           <div
             key={amount}
             className={`cursor-pointer border rounded-lg p-4 text-center transition-colors
-              ${selectedAmount === amount ? "border-blue-500 bg-blue-100 text-orange-500" : "border-gray-300 hover:bg-gray-100"}
+              ${selectedAmount === amount ? "border-blue-500 bg-blue-100 text-mainColor" : "border-gray-300 hover:bg-gray-100"}
             `}
             onClick={() => handleCardSelect(amount)}
           >
@@ -81,7 +81,7 @@ export default function RechargeOptionsSelector({ userId }: RechargeOptionsSelec
 
       {/* Submit Button */}
       <div className="mt-6">
-        <Button onClick={handleSubmit} className="w-full bg-orange-500 hover:bg-orange-600" disabled={isLoading}>
+        <Button onClick={handleSubmit} className="w-full bg-mainColor hover:bg-mainColorOnHover" disabled={isLoading}>
           {isLoading ? "Submitting..." : "Proceed to Recharge"}
         </Button>
       </div>

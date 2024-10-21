@@ -192,7 +192,7 @@ const EditTaskGroupModal: React.FC<EditTaskGroupModalProps> = ({
           </section>
 
           <DialogFooter className="flex justify-between mt-8">
-            <Button type="submit" className="bg-orange-500 w-full" disabled={loading}>
+            <Button type="submit" className="bg-mainColor w-full" disabled={loading}>
               {loading ? (
                 <span className="flex items-center justify-center">
                   <span className="loader"></span> {/* Add your loading spinner here */}
