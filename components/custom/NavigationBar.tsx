@@ -4,6 +4,7 @@ import { Sheet, SheetContent, SheetTrigger } from '../ui/sheet'
 import { Button, buttonVariants } from '../ui/button'
 import Link from 'next/link'
 import { NavigationMenu, NavigationMenuLink, NavigationMenuList } from '../ui/navigation-menu'
+import Image from 'next/image'
 
 const NavigationBar = () => {
   return (
@@ -21,9 +22,8 @@ const NavigationBar = () => {
           <SheetContent side="left">
             <Link href="#" prefetch={false}>
               {/* <MountainIcon className="h-6 w-6" /> */}
-              <img src="/assets/images/logo-lg.png" alt="logo" />
+              <Image src="/assets/images/logo.png" className="object-cover" alt="alt" width={180} height={140} />
 
-              <span className="sr-only">Acme Inc</span>
             </Link>
             <div className="grid gap-2 py-6">
     
@@ -63,9 +63,8 @@ const NavigationBar = () => {
 
         <Link href="/" className="mr-6 hidden lg:flex" prefetch={false}>
           {/* <MountainIcon className="h-6 w-6" /> */}
-          <img src="/assets/images/logo-lg.png" alt="logo" className="" />
+          <Image src="/assets/images/logo.png" className="object-cover" alt="alt" width={180} height={140} />
 
-          <span className="sr-only">Acme Inc</span>
         </Link>
         <div className="flex w-full justify-end">
           <NavigationMenu className="hidden lg:flex">

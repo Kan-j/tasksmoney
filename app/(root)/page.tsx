@@ -32,7 +32,13 @@ const Home = () => {
             </section>
             {/* Image Section */}
             <section className="flex items-center justify-center">
-            <Image src="/assets/images/logo.png" className="object-cover" alt="alt" width={180} height={140} />
+              <Image 
+                className="w-full object-contain aspect-4/3" 
+                alt="Hero Image" 
+                src={'/assets/images/logo.png'} 
+                width={450} 
+                height={360}
+              />
             </section>
           </section>
         </section>
