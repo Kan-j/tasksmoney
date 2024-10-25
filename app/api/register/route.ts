@@ -43,11 +43,24 @@ export async function POST(request: Request) {
   }
 
   // Generate a unique referral code for the new user
-  const userReferralCode = generate({
-    length: 8, // Customize length as needed
-    count: 1,  // Only need one code
-  })[0];
+  let userReferralCode: string='';
+  let isCodeUnique = false;
 
+  // Keep generating a code until a unique one is found
+  while (!isCodeUnique) {
+    userReferralCode = generate({
+      length: 8, // Customize length as needed
+      count: 1,  // Only need one code
+    })[0];
+
+    // Check if the referral code already exists
+    const existingCodeUser = await User.findOne({ referralCode: userReferralCode });
+    if (!existingCodeUser) {
+      isCodeUnique = true; // Referral code is unique, exit the loop
+    }
+  }
+
+  // Create a new user
   // Create a new user
   const newUser = new User({
     email: body.email,
@@ -57,7 +70,7 @@ export async function POST(request: Request) {
     totalCommissions: 0,
     isAdmin: false,
     referredBy: referredBy, // If referred by someone, store their user ID
-    referralCode: userReferralCode, // Store generated referral code
+    referralCode: userReferralCode, // Store unique referral code
   });
 
   // Save the user to the database
