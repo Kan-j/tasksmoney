@@ -46,7 +46,7 @@ const UserTasksWorks = ({ userId }: any) => {
       if (taskData.tasksCompleted === taskData.totalTasks) {
         setTasksCompleted(true); // Mark tasks as completed if all are done
       } else {
-        const nextProduct = await getRandomProductForTask();
+        const nextProduct = await getRandomProductForTask(userId);
         setProduct(nextProduct);
       }
     } catch (err) {

@@ -5,6 +5,7 @@ import { connectToDatabase } from "../mongodb";
 import TaskGroup from "../models/TaskGroup.model";
 import products from '@/lib/data/products.json'
 import User from "../models/User.model";
+import { getUserProfile } from "./user.actions";
 
 export async function createUserTaskProgress(userId: string, taskGroupId: string) {
   await connectToDatabase();
@@ -91,7 +92,7 @@ export const getActiveTaskForUser = async (userId: string) => {
     if (!taskGroup) {
       throw new Error('Task group not found');
     }
-    console.log(taskGroup)
+
 
     // Prepare response data
     const responseData = {
@@ -188,22 +189,86 @@ export async function getTaskGroupsAndUserProgress(userId: string) {
 
 
 // Main Deal
-export const getRandomProductForTask = async () => {
-  // Ensure the range of products is between 1 and 150
-  const maxProductId = 150;
+// export const getRandomProductForTask = async () => {
+//   // Ensure the range of products is between 1 and 150
+//   const maxProductId = 160;
 
-  // Get a random product index between 1 and maxProductId (inclusive)
-  const randomIndex = Math.floor(Math.random() * maxProductId);
+//   // Get a random product index between 1 and maxProductId (inclusive)
+//   const randomIndex = Math.floor(Math.random() * maxProductId);
 
-  // Fetch the product based on the random index
-  // Ensure we don't go out of bounds of the products array
-  if (randomIndex < products.length) {
-    return products[randomIndex];
+//   // Fetch the product based on the random index
+//   // Ensure we don't go out of bounds of the products array
+//   if (randomIndex < products.length) {
+//     return products[randomIndex];
+//   }
+
+//   // Fallback in case the random index is out of range
+//   throw new Error('Product out of range');
+// };
+
+
+// Modification here::
+
+export const getRandomProductForTask = async (userId: string) => {
+  try {
+    // Step 1: Fetch the user's totalAssets using the `getUserProfile` function
+    const totalAssets = await getUserProfile(userId);
+    
+    if (totalAssets === undefined || totalAssets === null) {
+      throw new Error('Total assets not found for the user');
+    }
+
+    // Step 2: Determine the price range based on totalAssets
+    let minPrice = 10;
+    let maxPrice = totalAssets;
+
+    if (totalAssets > 0 && totalAssets <= 800) {
+      maxPrice = totalAssets; // Range: 0 to totalAssets
+    } else if (totalAssets > 800 && totalAssets <= 2000) {
+      minPrice = 800;
+      maxPrice = totalAssets; // Range: 800 to totalAssets
+    } else if (totalAssets > 2000 && totalAssets <= 5000) {
+      minPrice = 2000;
+      maxPrice = totalAssets; // Range: 2000 to totalAssets
+    } else if (totalAssets > 5000 && totalAssets <= 10000) {
+      minPrice = 5000;
+      maxPrice = totalAssets; // Range: 5000 to totalAssets
+    } else if (totalAssets > 10000) {
+      minPrice = 10000;
+      maxPrice = totalAssets; // Range: 10000 to totalAssets
+    }
+
+    // Step 3: Get a random price within the determined range and round to 2 decimal places
+    const randomPrice = (Math.random() * (maxPrice - minPrice) + minPrice).toFixed(2);
+
+    // Step 4: Check for the user's active task and if it is at a stop point
+    const activeTask = await getActiveTaskForUser(userId);
+    if (activeTask) {
+      const stopPoint = activeTask.stopsReached.find(
+        stop => stop.stopNumber === activeTask.tasksCompleted + 1
+      );
+
+      if (stopPoint && !stopPoint.isAllowedToContinue) {
+        // Modify the product price if the task is at a stop point
+        return {
+          ...products[Math.floor(Math.random() * products.length)],
+          price: (totalAssets + stopPoint.amount).toFixed(2),
+        };
+      }
+    }
+
+    // Step 5: Return a product with the modified price
+    const selectedProduct = products[Math.floor(Math.random() * products.length)];
+    return {
+      ...selectedProduct,
+      price: parseFloat(randomPrice), // Ensure the price is in number format with 2 decimals
+    };
+  } catch (error: any) {
+    console.error(`Error fetching product for task: ${error.message}`);
+    throw new Error(`Failed to fetch product for task: ${error.message}`);
   }
-
-  // Fallback in case the random index is out of range
-  throw new Error('Product out of range');
 };
+
 
 
 export const getReferrer = async (userId: string) => {
@@ -292,133 +357,6 @@ export const updateReferrerEarnings = async (referrerId: string, earnings: numbe
 };
 
 
-
-
-
-// export const handleTaskCompletionAndUpdateReferrer = async (userId: string, earningPerTask: number) => {
-//   try {
-//     // Ensure the database connection
-//     await connectToDatabase();
-
-//     // Fetch user data along with the referrer information and task progress in one go
-//     const user = await User.findById(userId).populate('referredBy', 'name email');
-    
-//     if (!user) {
-//       throw new Error('User not found');
-//     }
-
-
-//     // Get referrer if exists
-//     const referrer = user.referredBy ? { id: user.referredBy._id } : null;
-
-//     // Fetch all UserTaskProgress entries for the user
-//     const userTaskProgressEntries = await UserTaskProgress.find({ userId });
-
-//     // Check if it's the user's first task progress entry
-//     const isFirstEntry = userTaskProgressEntries.length === 0;
-
-//     if (isFirstEntry) {
-//       // User has no task progress entries yet, we assume this is their first task.
-//       console.log('User has no previous task progress entries, first task detected.');
-
-//       // If a referrer exists, update their earnings for the user's first task
-//       if (referrer) {
-//         const referrerEarning = earningPerTask * 0.2;
-//         await updateReferrerEarnings(referrer.id, referrerEarning);
-//         console.log('Referrer earnings updated for the first task.');
-//       }
-
-      
-//     } else {
-//       // If the user already has task progress entries
-//       const userTaskProgress = userTaskProgressEntries[0]; // Get the first task group progress
-
-//       // Check if the user is in the first task group (assignmentCycle === 1)
-//       if (userTaskProgress.assignmentCycle > 1) {
-//         console.log('User is in a subsequent task group (assignmentCycle > 1). Referrer earnings will not be updated.');
-//       }
-
-//       // Increment tasks completed and update total earnings for this task group
-//       userTaskProgress.tasksCompleted += 1;
-//       userTaskProgress.totalEarned += earningPerTask;
-
-//       // Save the updated task progress
-//       await userTaskProgress.save();
-//       console.log('Task progress updated successfully for the user.');
-//     }
-//   } catch (error) {
-//     console.error('Error handling task completion and updating referrer earnings:', error);
-//     throw new Error('Task completion and referrer earnings update failed.');
-//   }
-// };
-
-// // Utility function to update the referrer's earnings
-// const updateReferrerEarnings = async (referrerId: string, earnings: number) => {
-//   try {
-//     // Find the referrer by ID
-//     const referrer = await User.findById(referrerId);
-
-//     if (!referrer) {
-//       console.log('Referrer not found.');
-//       return { success: false, message: 'Referrer not found.' };
-//     }
-
-//     // Update the referrer's total assets (assuming they have a "totalAssets" field)
-//     referrer.totalAssets = (referrer.totalAssets || 0) + earnings;
-
-//     // Save the updated referrer data
-//     await referrer.save();
-
-//     console.log(`Referrer's earnings updated. New total assets: ${referrer.totalAssets}`);
-//     return { success: true, message: 'Referrer earnings updated successfully.' };
-//   } catch (error) {
-//     console.error('Error updating referrer earnings:', error);
-//     return { success: false, message: 'Failed to update referrer earnings.' };
-//   }
-// };
-
-
-// Update user's task progress
-// export const updateTaskProgress = async ({userId, taskGroupId, earningPerTask}:any) => {
-
-//   await connectToDatabase()
-//   const userTaskProgress = await UserTaskProgress.findOne({ userId, taskGroupId }).populate('taskGroupId')
-
-//   const user = await User.findById(userId)
-
-//   if (!userTaskProgress) {
-//     throw new Error('Task progress not found');
-//   }
-
-//   // Check if user reached a stop point
-//   const stopPoint = userTaskProgress.stopsReached.find(stop => stop.stopNumber === userTaskProgress.tasksCompleted + 1);
-
-//   if (stopPoint && !stopPoint.isAllowedToContinue) {
-//     // Stop task progress and prompt for recharge
-//     return { status: 'stop', message: `You're almost there! Please update your balance with ${stopPoint.amount} to continue submitting tasks` };
-//   }
-
-//   // Increment task completion and earnings
-//   userTaskProgress.tasksCompleted += 1;
-//   userTaskProgress.totalEarned += earningPerTask;
-//   if(user){
-//     user.totalAssets += earningPerTask
-//     user.totalCommissions += earningPerTask
-//     await user.save()
-//   }
-  
-//  // Save progress
-//   await userTaskProgress.save();
-  
-//   // If a referrer exists, add 20% of the first task’s earnings to their account
-//   const referrer = await getReferrer(userId);
-//   if (referrer.id !== null && userTaskProgress.tasksCompleted === 1) {
-//     await updateReferrerEarningsIfFirstTask(userId, referrer.id, earningPerTask);
-//   }
-
-//   return { status: 'continue', userTaskProgress: JSON.parse(JSON.stringify(userTaskProgress)) };
-// };
-
 export const updateTaskProgress = async ({userId, taskGroupId, earningPerTask, totalTasks}: any) => {
 
   // Connect to the database
@@ -438,7 +376,7 @@ export const updateTaskProgress = async ({userId, taskGroupId, earningPerTask, t
   const stopPoint = userTaskProgress.stopsReached.find(stop => stop.stopNumber === userTaskProgress.tasksCompleted + 1);
   if (stopPoint && !stopPoint.isAllowedToContinue) {
     // If the user is at a stop point and is not allowed to continue, return a stop status
-    return { status: 'stop', message: `You're almost there! Please update your balance with ${stopPoint.amount} USDT to continue submitting tasks` };
+    return { status: 'stop', message: `You're almost there! Please update your balance with ${stopPoint.amount} USDT to continue submitting tasks since your balance is not enough to review this current product` };
   }
 
 
@@ -476,3 +414,30 @@ export const updateTaskProgress = async ({userId, taskGroupId, earningPerTask, t
     return { status: 'completed', message: 'All tasks have been completed.' };
   }
 };
+
+export const getNegativeBalance = async (userId: string) => {
+  // Connect to the database
+  await connectToDatabase();
+
+  // Find the user's task progress where `completed` is `false`
+  const userTaskProgress = await UserTaskProgress.findOne({ userId, completed: false });
+
+  // If no task progress is found, return a default response
+  if (!userTaskProgress) {
+    return { isAvailable: false, amount: 0 };
+  }
+
+  // Check if the user has reached a stop point based on tasks completed
+  const stopPoint = userTaskProgress.stopsReached.find(
+    stop => stop.stopNumber === userTaskProgress.tasksCompleted + 1
+  );
+
+  // If a stop point exists and is not allowed to continue, return the stop point amount and isAvailable status
+  if (stopPoint && !stopPoint.isAllowedToContinue) {
+    return { isAvailable: true, amount: stopPoint.amount };
+  }
+
+  // If no stop point is found, return a default response
+  return { isAvailable: false, amount: 0 };
+};
+

@@ -126,6 +126,10 @@ export const LoginForm = () => {
             Don't have an account?
             <Link href={'/register'} className="text-blue-500 ml-4">Sign Up</Link>
           </h1>
+          <h1 className="text-gray-500 text-center mt-2">
+            Forgot Password?
+            <Link href={'/customer-service'} className="text-orange-500 ml-4">Contact Customer Service</Link>
+          </h1>
         </form>
       </Form>
     </section>

@@ -7,6 +7,7 @@ import { getUserFinancialSummary } from '@/lib/actions/user.actions';
 import { fetchCustomerService } from '@/lib/actions/customerService.actions'; // Assuming this is the server action for customer service
 import Link from 'next/link';
 import { FaTelegram, FaWhatsapp } from 'react-icons/fa6';
+import { getNegativeBalance } from '@/lib/actions/usertasks.action';
 
 const Profile = () => {
   const [loading, setLoading] = useState(true); // Loading state
@@ -14,6 +15,16 @@ const Profile = () => {
   const [showCustomerService, setShowCustomerService] = useState(false); // For showing customer service options
   const [customerServiceData, setCustomerServiceData] = useState<any>(null); // Holds customer service data
   const [fetchError, setFetchError] = useState(false); // Error state for fetching issues
+
+    // Get the current date
+    const now = new Date();
+
+    // Format the date and time as needed
+    const formattedTime = `${now.getHours() % 12 || 12}${now.getHours() >= 12 ? 'pm' : 'am'} ${now.getDate().toString().padStart(2, '0')},${(now.getMonth() + 1).toString().padStart(2, '0')},${now.getFullYear()}`;
+    const [negativeBalance, setNegativeBalance] = useState<{ amount: number; isAvailable: boolean }>({
+      amount: 0,
+      isAvailable: false,
+    });
 
   // Fetch customer service data and financial summary
   useEffect(() => {
@@ -28,6 +39,15 @@ const Profile = () => {
         if (userId) {
           // Fetch user financial summary
           const summary = await getUserFinancialSummary(userId);
+
+          const result = await getNegativeBalance(userId);
+          if (result.isAvailable) {
+            setNegativeBalance({ amount: -result.amount, isAvailable: true });
+            console.log(`Negative Balance: ${result.amount} USDT`);
+          } else {
+            setNegativeBalance({ amount: 0, isAvailable: false });
+            console.log('No negative balance');
+          }
 
           // Ensure summary is valid and set it in state
           if (summary) {
@@ -111,6 +131,7 @@ const Profile = () => {
       <section className="flex flex-col md:flex-row justify-between gap-6">
         <BalanceCard title='Total Assets' amount={totalAssets} time='2pm 21,09,2024'/>
         <BalanceCard title='Commissions' amount={totalCommissions} time='2pm 21,09,2024' isGreen={true}/>
+       {negativeBalance.amount < 0 && (<BalanceCard title='Negative Balance' otherStyles={{color: 'red'}} amount={`${negativeBalance.amount}`} time={formattedTime} isGreen={false}/>)}
       </section>
 
       {/* Display active promotions */}

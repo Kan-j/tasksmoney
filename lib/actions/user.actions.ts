@@ -135,48 +135,6 @@ export async function getAllNonAdminUsersPaginated(
 }
 
 
-
-// Define the server action to fetch the necessary data for a particular user
-// export const getUserFinancialSummary = async (userId: string) => {
-//   try {
-//     // Check if the userId is valid
-//     if (!Types.ObjectId.isValid(userId)) {
-//       throw new Error("Invalid user ID");
-//     }
-
-//     await connectToDatabase(); // Connect to MongoDB
-//     // 1. Get the user's total assets and total commissions
-//     const user = await User.findById(userId, "totalAssets totalCommissions");
-
-//     if (!user) {
-//       throw new Error("User not found");
-//     }
-
-//     // 2. Fetch the last 10 approved recharges for the user
-//     const approvedRecharges = await RechargeRequest.find({
-//       userId: userId,
-//       status: "approved",
-//     })
-//       .sort({ createdAt: -1 }) // Sort by latest recharges first
-//       .limit(10) // Limit to the last 10
-//       .lean(); // Use lean to return plain JavaScript objects
-
-//     // 3. Fetch all active promotions
-//     const activePromotions = await Promotion.find({ isActive: true }).lean();
-
-//     // Return the results
-//     return {
-//       totalAssets: user.totalAssets,
-//       totalCommissions: user.totalCommissions,
-//       last10ApprovedRecharges: JSON.parse(JSON.stringify(approvedRecharges)),
-//       activePromotions: JSON.parse(JSON.stringify(activePromotions)),
-//     };
-//   } catch (error) {
-//     console.error("Error fetching user financial summary:", error);
-//     throw new Error("Failed to retrieve user financial summary");
-//   }
-// };
-
 export const getUserFinancialSummary = async (userId: string) => {
   try {
     // Check if the userId is valid
