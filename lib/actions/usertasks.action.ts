@@ -314,7 +314,6 @@ export const updateReferrerEarnings = async (referrerId: string, earnings: numbe
   try {
     // Find the referrer by ID
     const referrer = await User.findById(referrerId);
-
     if (!referrer) {
       console.log('Referrer not found.');
       return { success: false, message: 'Referrer not found.' };
@@ -323,6 +322,7 @@ export const updateReferrerEarnings = async (referrerId: string, earnings: numbe
 
     referrer.totalAssets += earnings
     referrer.totalCommissions += earnings
+
 
     // Save the updated referrer record
     await referrer.save();
@@ -383,6 +383,7 @@ export const updateTaskProgress = async ({userId, taskGroupId, earningPerTask, t
 
     // If referrer exists and this is the first task, update referrer earnings
     const referrer = await getReferrer(userId);
+
     if (referrer.id !== null) {
       await updateReferrerEarningsForEveryTask(referrer.id, earningPerTask);
     }
