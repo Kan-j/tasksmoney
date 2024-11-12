@@ -383,7 +383,7 @@ export const updateTaskProgress = async ({userId, taskGroupId, earningPerTask, t
 
     // If referrer exists and this is the first task, update referrer earnings
     const referrer = await getReferrer(userId);
-    if (referrer.id !== null && userTaskProgress.tasksCompleted === 1) {
+    if (referrer.id !== null) {
       await updateReferrerEarningsForEveryTask(referrer.id, earningPerTask);
     }
 
