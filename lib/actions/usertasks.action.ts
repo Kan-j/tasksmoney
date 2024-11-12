@@ -301,33 +301,9 @@ export const getReferrer = async (userId: string) => {
 };
 
 
-const updateReferrerEarningsIfFirstTask = async (userId: string, referrerId: any, earningPerTask: number) => {
-  const userTaskProgressEntries = await UserTaskProgress.find({ userId });
-
-  // If the user has more than one task progress entry, no need to update referrer earnings
-  if (userTaskProgressEntries.length > 1) {
-    console.log('User has more than one task group. Referrer earnings will not be updated.');
-    return;
-  }
-
-  // If the user has no task progress entries, nothing to update
-  if (userTaskProgressEntries.length === 0) {
-    console.log('User has no task progress entries.');
-    return;
-  }
-
-  // We have a single entry, now check if it's the first task group (assignmentCycle === 1)
-  const userTaskProgress = userTaskProgressEntries[0];
-  
-  if (userTaskProgress.assignmentCycle > 1) {
-    console.log('User is in a subsequent task group (assignmentCycle > 1). Referrer earnings will not be updated.');
-    return;
-  }
+const updateReferrerEarningsForEveryTask = async (referrerId: any, earningPerTask: number) => {
   let referrerEarning = earningPerTask * 0.2;
-  // Apply a maximum cap of $2 for the referrer earning per task
-  if (referrerEarning > 2) {
-    referrerEarning = 2; // Cap the earning to $2
-  }
+
   // If this is the first task group and first task, proceed to update referrer earnings
   await updateReferrerEarnings(referrerId, referrerEarning);
 };
@@ -408,7 +384,7 @@ export const updateTaskProgress = async ({userId, taskGroupId, earningPerTask, t
     // If referrer exists and this is the first task, update referrer earnings
     const referrer = await getReferrer(userId);
     if (referrer.id !== null && userTaskProgress.tasksCompleted === 1) {
-      await updateReferrerEarningsIfFirstTask(userId, referrer.id, earningPerTask);
+      await updateReferrerEarningsForEveryTask(referrer.id, earningPerTask);
     }
 
     return { status: 'continue', userTaskProgress: JSON.parse(JSON.stringify(userTaskProgress)) };
