@@ -173,12 +173,12 @@ const UserTasksWorks = ({ userId }: any) => {
 
                 <section className="flex justify-between w-full items-center text-sm mt-2 text-gray-600">
                   <h1>Price</h1>
-                  <h1>Commission</h1>
+                 
                 </section>
 
                 <section className="flex justify-between text-gray-700 text-xl mt-1 mb-2">
                   <h1>${product.price}</h1>
-                  <h1>${earningPerTask}</h1> {/* Example commission logic */}
+
                 </section>
 
                 <Select onValueChange={(value) => setSelectedReview(value)}>

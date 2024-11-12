@@ -149,6 +149,8 @@ const EditTaskGroupModal: React.FC<EditTaskGroupModalProps> = ({
               <h1 className="mb-2 text-sm font-bold">Earning Per Task</h1>
               <Input
                 placeholder="Earnings per task"
+                step="0.01" // Allows decimals up to two places
+                min="0"     // Set the minimum value if needed
                 {...register('earningPerTask', { valueAsNumber: true })}
                 className={errors.earningPerTask ? 'border-red-500' : ''}
               />
@@ -177,6 +179,8 @@ const EditTaskGroupModal: React.FC<EditTaskGroupModalProps> = ({
                   <h1 className="mb-2 text-sm font-bold">Payment Amount</h1>
                   <Input
                     placeholder="Payment amount"
+                    step="0.01" // Allows decimals up to two places
+                    min="0"     // Set the minimum value if needed
                     value={stop.paymentAmount}
                     onChange={(e) => handleStopPointChange(index, 'paymentAmount', e.target.value)}
                     className={errors.stopPoints?.[index]?.paymentAmount ? 'border-red-500' : ''}

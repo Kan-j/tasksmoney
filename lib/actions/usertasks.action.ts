@@ -323,7 +323,11 @@ const updateReferrerEarningsIfFirstTask = async (userId: string, referrerId: any
     console.log('User is in a subsequent task group (assignmentCycle > 1). Referrer earnings will not be updated.');
     return;
   }
-  const referrerEarning = earningPerTask * 0.2;
+  let referrerEarning = earningPerTask * 0.2;
+  // Apply a maximum cap of $2 for the referrer earning per task
+  if (referrerEarning > 2) {
+    referrerEarning = 2; // Cap the earning to $2
+  }
   // If this is the first task group and first task, proceed to update referrer earnings
   await updateReferrerEarnings(referrerId, referrerEarning);
 };

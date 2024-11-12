@@ -8,8 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { IoRefreshCircle } from 'react-icons/io5';
 import Link from 'next/link';
-import { revalidatePath } from 'next/cache';
-import { usePathname, useRouter } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { toast } from 'sonner';
 
 
@@ -142,6 +141,8 @@ const CreateTask: React.FC = () => {
                   <Input
                     type="number"
                     placeholder="Amount earned per submission"
+                    step="0.01" // Allows decimals up to two places
+                    min="0"     // Set the minimum value if needed
                     {...register('earningPerTask', {
                       setValueAs: (value) => (value ? parseFloat(value) : 0), // Convert to number
                     })}
@@ -169,6 +170,8 @@ const CreateTask: React.FC = () => {
                       <h1 className="mb-2 text-sm font-bold">Amount</h1>
                       <Input
                         type="number"
+                        step="0.01" // Allows decimals up to two places
+                        min="0"     // Set the minimum value if needed
                         placeholder="Amount for this stop"
                         {...register(`stopPoints.${index}.paymentAmount`, {
                           setValueAs: (value) => (value ? parseFloat(value) : 0), // Convert to number
