@@ -29,7 +29,7 @@ const formSchema = z.object({
   referralCode: z.string().min(3), // Referral code is optional
 });
 
-export const RegisterForm = ({referralCode}:{referralCode: string}) => {
+export const RegisterForm = () => {
   const router = useRouter(); // For programmatic navigation after success
   const [error, setError] = useState<string | null>(null); // To handle error messages
   const [loading, setLoading] = useState<boolean>(false); // To handle the loading state
@@ -40,7 +40,7 @@ export const RegisterForm = ({referralCode}:{referralCode: string}) => {
       username: "",
       email: "",
       password: "",
-      referralCode: referralCode || 'BFiLkZ4O', // Default empty value for referral code
+      referralCode: '', // Default empty value for referral code
     },
   });
 
