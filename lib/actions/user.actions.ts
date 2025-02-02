@@ -193,9 +193,9 @@ export const getUserProfile = async (userId: string) => {
     if (!user) {
       throw new Error('User not found');
     }
-    // return user.totalAssets; // Return the user's balance
+    return user.totalAssets; // Return the user's balance
      // Ensure totalAssets is formatted to 2 decimal places
-     return Number(user.totalAssets || 0.000).toFixed(2);
+    //  return Number(user.totalAssets || 0.000).toFixed(2);
   } catch (error: any) {
     throw new Error(`Failed to fetch user profile: ${error.message}`);
   }

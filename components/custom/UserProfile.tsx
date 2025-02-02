@@ -18,7 +18,7 @@ const UserProfile = ({ userId }: any) => {
       setError(null); // Reset error state
       try {
         const fetchedBalance = await getUserProfile(userId);
-        setBalance(Number(fetchedBalance).toFixed(2)); // Set the balance state with 2 decimal places
+        setBalance(fetchedBalance); // Set the balance state
       } catch (error: any) {
         setError(error.message);
       } finally {
@@ -62,7 +62,7 @@ const UserProfile = ({ userId }: any) => {
   return (
     <section className="flex flex-col md:flex-row justify-between gap-6">
       <section className="">
-        <BalanceCard title='Total Assets' amount={balance?.toString() || '0'} time={formattedDate} />
+        <BalanceCard title='Total Assets' amount={balance?.toFixed(2)?.toString() || '0'} time={formattedDate} />
       </section>
 
       <section className="border  bg-white px-6 py-4 w-full md:w-7/12">

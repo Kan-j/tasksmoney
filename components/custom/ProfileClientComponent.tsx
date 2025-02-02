@@ -129,8 +129,8 @@ const Profile = () => {
 
       {/* Display total assets and commissions */}
       <section className="flex flex-col md:flex-row justify-between gap-6">
-        <BalanceCard title='Total Assets' amount={totalAssets} time='2pm 21,09,2024'/>
-        <BalanceCard title='Commissions' amount={totalCommissions} time='2pm 21,09,2024' isGreen={true}/>
+        <BalanceCard title='Total Assets' amount={totalAssets?.toFixed(2)} time='2pm 21,09,2024'/>
+        <BalanceCard title='Commissions' amount={totalCommissions?.toFixed(2)} time='2pm 21,09,2024' isGreen={true}/>
        {negativeBalance.amount < 0 && (<BalanceCard title='Negative Balance' otherStyles={{color: 'red'}} amount={`${negativeBalance.amount}`} time={formattedTime} isGreen={false}/>)}
       </section>
 
