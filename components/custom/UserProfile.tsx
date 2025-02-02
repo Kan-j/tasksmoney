@@ -7,7 +7,7 @@ import { getUserProfile, updateUserBalance } from '@/lib/actions/user.actions';
  // Ensure the path is correct
 
 const UserProfile = ({ userId }: any) => {
-  const [balance, setBalance] = useState<any | null>(null); // State for user balance
+  const [balance, setBalance] = useState<number | null>(null); // State for user balance
   const [newBalance, setNewBalance] = useState<number | null>(null); // State for updated balance
   const [loading, setLoading] = useState(true); // Loading state for fetching user data
   const [error, setError] = useState<string | null>(null); // State for error messages
@@ -18,7 +18,7 @@ const UserProfile = ({ userId }: any) => {
       setError(null); // Reset error state
       try {
         const fetchedBalance = await getUserProfile(userId);
-        setBalance(fetchedBalance); // Set the balance state
+        setBalance(Number(fetchedBalance).toFixed(2)); // Set the balance state with 2 decimal places
       } catch (error: any) {
         setError(error.message);
       } finally {
